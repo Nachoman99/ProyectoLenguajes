@@ -8,6 +8,7 @@ namespace LabInvestigacion
 {
     static class Program
     {
+        //// Salundando a Ignacio Zamora Salazar
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
