@@ -11,7 +11,7 @@ namespace LabInvestigacion
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-
+            label1.Text = "Oscar Ha Sido Asesinado";
         }
     }
 }
