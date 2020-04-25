@@ -55,6 +55,7 @@
             this.btnInsertar.TabIndex = 1;
             this.btnInsertar.Text = "1-Insertar nuevo cliente";
             this.btnInsertar.UseVisualStyleBackColor = true;
+            this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 
             // btnModificar
             // 
@@ -93,7 +94,7 @@
             // 
             this.btnAtras.AutoSize = true;
             this.btnAtras.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAtras.Location = new System.Drawing.Point(713, 415);
+            this.btnAtras.Location = new System.Drawing.Point(730, 411);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(58, 27);
             this.btnAtras.TabIndex = 5;

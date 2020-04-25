@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,13 @@ namespace LabInvestigacion.Interfaz
         private void MantenimientoClientes_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnInsertar_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            InsertarCliente insertar = new InsertarCliente();
+            insertar.Visible = true;
         }
     }
 }

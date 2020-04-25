@@ -6,7 +6,8 @@ namespace LabInvestigacion
 {
     public partial class Form1 : Form
     {
-        SqlConnection conexion = new SqlConnection("server=LAPTOP-3D7M2PMI ; database=Northwind ; integrated security = true");
+        SqlConnection conexion = new SqlConnection(@"server=LAPTOP-3D7M2PMI\SQLSERVERDEV2019 ; database=LanguajesLab1 ; integrated security = true");
+        
         public Form1()
         {
             InitializeComponent();
@@ -16,7 +17,6 @@ namespace LabInvestigacion
         {
             conexion.Open();
             MessageBox.Show("Se abrió la conexión con el servidor SQL Server y se seleccionó la base de datos");
-            
         }
 
         private void btnDesconecta_Click(object sender, System.EventArgs e)
@@ -24,8 +24,6 @@ namespace LabInvestigacion
             conexion.Close();
             MessageBox.Show("Se cerró la conexión.");
         }
-
-
 
         private void btnConsulta_Click(object sender, System.EventArgs e)
         {
@@ -36,6 +34,11 @@ namespace LabInvestigacion
             MiDataReader = Comando.ExecuteReader();
             MiDataTable.Load(MiDataReader, LoadOption.OverwriteChanges);
             txtDatos.DataSource = MiDataTable;
+        }
+
+        private void Form1_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

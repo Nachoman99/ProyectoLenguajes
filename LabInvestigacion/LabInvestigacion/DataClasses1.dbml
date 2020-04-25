@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LanguajesLab1" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-3D7M2PMI\SQLSERVERDEV2019;Initial Catalog=LanguajesLab1;Integrated Security=True" SettingsObjectName="LabInvestigacion.Properties.Settings" SettingsPropertyName="LanguajesLab1ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Cliente" Member="Cliente">
+    <Type Name="Cliente">
+      <Column Name="Cedula" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellido" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NumeroTelefono" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Cliente_Factura" Member="Factura" ThisKey="Cedula" OtherKey="Cedula_Fk" Type="Factura" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Factura" Member="Factura">
+    <Type Name="Factura">
+      <Column Name="CodigoFactura" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cedula_Fk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFactura" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Factura_FacturaPorProducto" Member="FacturaPorProducto" ThisKey="CodigoFactura" OtherKey="CodigoFactura_Fk" Type="FacturaPorProducto" />
+      <Association Name="Cliente_Factura" Member="Cliente" ThisKey="Cedula_Fk" OtherKey="Cedula" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FacturaPorProducto" Member="FacturaPorProducto">
+    <Type Name="FacturaPorProducto">
+      <Column Name="CantidadProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoProducto_Fk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoFactura_Fk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Factura_FacturaPorProducto" Member="Factura" ThisKey="CodigoFactura_Fk" OtherKey="CodigoFactura" Type="Factura" IsForeignKey="true" />
+      <Association Name="Producto_FacturaPorProducto" Member="Producto" ThisKey="CodigoProducto_Fk" OtherKey="CodigoProducto" Type="Producto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Producto" Member="Producto">
+    <Type Name="Producto">
+      <Column Name="CodigoProducto" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripciom" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CantidadInventario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Producto_FacturaPorProducto" Member="FacturaPorProducto" ThisKey="CodigoProducto" OtherKey="CodigoProducto_Fk" Type="FacturaPorProducto" />
+    </Type>
+  </Table>
+</Database>
