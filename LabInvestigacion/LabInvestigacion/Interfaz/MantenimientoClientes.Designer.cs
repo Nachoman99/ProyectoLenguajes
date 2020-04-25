@@ -47,53 +47,65 @@
             // 
             // btnInsertar
             // 
+            this.btnInsertar.AutoSize = true;
+            this.btnInsertar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnInsertar.Location = new System.Drawing.Point(13, 58);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(167, 23);
+            this.btnInsertar.Size = new System.Drawing.Size(167, 27);
             this.btnInsertar.TabIndex = 1;
             this.btnInsertar.Text = "1-Insertar nuevo cliente";
             this.btnInsertar.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
+            this.btnModificar.AutoSize = true;
+            this.btnModificar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnModificar.Location = new System.Drawing.Point(13, 118);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(167, 23);
+            this.btnModificar.Size = new System.Drawing.Size(153, 27);
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "2-Modificar un cliente";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // btnConsultar
             // 
+            this.btnConsultar.AutoSize = true;
+            this.btnConsultar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConsultar.Location = new System.Drawing.Point(12, 186);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(167, 23);
+            this.btnConsultar.Size = new System.Drawing.Size(156, 27);
             this.btnConsultar.TabIndex = 3;
             this.btnConsultar.Text = "4-Consultar un cliente";
             this.btnConsultar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
+            this.btnEliminar.AutoSize = true;
+            this.btnEliminar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnEliminar.Location = new System.Drawing.Point(12, 253);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(167, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(146, 27);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "5-Eliminar un cliente";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(684, 397);
+            this.btnAtras.AutoSize = true;
+            this.btnAtras.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAtras.Location = new System.Drawing.Point(713, 415);
             this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(75, 23);
+            this.btnAtras.Size = new System.Drawing.Size(58, 27);
             this.btnAtras.TabIndex = 5;
-            this.btnAtras.Text = "Atrás";
+            this.btnAtras.Text = "Volver";
             this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
             // MantenimientoClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnEliminar);
@@ -103,6 +115,8 @@
             this.Controls.Add(this.label1);
             this.Name = "MantenimientoClientes";
             this.Text = "Mantenimiento de Clientes";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MantenimientoClientes_FormClosing);
+            this.Load += new System.EventHandler(this.MantenimientoClientes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

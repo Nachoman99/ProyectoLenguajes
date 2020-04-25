@@ -16,5 +16,24 @@ namespace LabInvestigacion.Interfaz
         {
             InitializeComponent();
         }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.Visible = true;
+        }
+
+        private void MantenimientoClientes_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.Visible = true;
+            this.Visible = false;
+        }
+
+        private void MantenimientoClientes_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

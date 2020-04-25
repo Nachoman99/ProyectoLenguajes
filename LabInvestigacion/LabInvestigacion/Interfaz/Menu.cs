@@ -44,5 +44,10 @@ namespace LabInvestigacion.Interfaz
             ReporteFacturacion reporte = new ReporteFacturacion();
             reporte.Visible = true;
         }
+
+        private void MenuPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
