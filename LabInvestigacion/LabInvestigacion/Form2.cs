@@ -13,8 +13,9 @@ namespace LabInvestigacion
 {
     public partial class Form2 : Form
     {
-        SqlConnection con = new SqlConnection(LabInvestigacion.Properties.Settings.Default.LanguajesLab1ConnectionString);
-        
+        //SqlConnection con = new SqlConnection(LabInvestigacion.Properties.Settings.Default.LanguajesLab1ConnectionString); Con este no se conecta
+        SqlConnection con = new SqlConnection(@"server= ELZEPHYRO\SQLSERVERDEV2019 ; database=LanguajesLab1 ; integrated security = true");
+
         public Form2()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace LabInvestigacion
             dc.Cliente.DeleteOnSubmit(DeleteClient);
             dc.SubmitChanges();
             MessageBox.Show("Se eliminó correctamente");
+            dc.Connection.Close();
+            con.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,9 +41,12 @@ namespace LabInvestigacion
             cliente.Correo = txtCorreo.Text;
             cliente.Nombre = txtNombre.Text;
             cliente.NumeroTelefono = txtTelefono.Text;
+            
             dc.Cliente.InsertOnSubmit(cliente);
             dc.SubmitChanges();
             MessageBox.Show("Se insertó exitosamente");
+            dc.Connection.Close();
+            con.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,6 +56,18 @@ namespace LabInvestigacion
             cliente.Nombre = txtNombre.Text;
             dc.SubmitChanges();
             MessageBox.Show("Se actualizó correctamente");
+            dc.Connection.Close();
+            con.Close();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btClose_Click(object sender, EventArgs e)
+        {
+            con.Close();
         }
     }
 }

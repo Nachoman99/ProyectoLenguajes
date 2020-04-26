@@ -42,7 +42,7 @@ namespace LabInvestigacion
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::LabInvestigacion.Properties.Settings.Default.LanguajesLab1ConnectionString, mappingSource)
+				base(global::LabInvestigacion.Properties.Settings.Default.LanguajesLab1ConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
