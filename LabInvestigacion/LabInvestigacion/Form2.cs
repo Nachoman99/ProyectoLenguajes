@@ -22,12 +22,29 @@ namespace LabInvestigacion
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {  
             DataClasses1DataContext dc = new DataClasses1DataContext(con);
-            Cliente DeleteClient = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(int.Parse(txtCedula.Text)));
-            dc.Cliente.DeleteOnSubmit(DeleteClient);
-            dc.SubmitChanges();
-            MessageBox.Show("Se eliminó correctamente");
+            //Cliente DeleteClient = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(int.Parse(txtCedula.Text)));
+            var prueba2 = from Cliente in dc.Cliente
+                          where Cliente.Cedula == int.Parse(txtCedula.Text)
+                          select Cliente;
+            foreach (var Cliente in prueba2)
+            {
+                dc.Cliente.DeleteOnSubmit(Cliente);
+            }
+
+            try
+            {
+                dc.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+            //dc.Cliente.DeleteOnSubmit((Cliente)dc.Cliente.Where(i => i.Cedula.Equals(int.Parse(txtCedula.Text))));
+            //dc.SubmitChanges();
+            MessageBox.Show("Se eliminó correctamente");  
             dc.Connection.Close();
             con.Close();
         }
@@ -63,11 +80,13 @@ namespace LabInvestigacion
         private void Form2_Load(object sender, EventArgs e)
         {
 
-        }
+    }
 
         private void btClose_Click(object sender, EventArgs e)
         {
-            con.Close();
+
         }
+
+        
     }
 }
