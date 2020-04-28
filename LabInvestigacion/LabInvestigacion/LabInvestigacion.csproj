@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controlador\Gestor.cs" />
+    <Compile Include="Logica\Gestor.cs" />
     <Compile Include="DataClasses1.cs">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
@@ -114,6 +114,7 @@
     <Compile Include="Interfaz\ReporteFacturacion.Designer.cs">
       <DependentUpon>ReporteFacturacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logica\LecturaArchivos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
