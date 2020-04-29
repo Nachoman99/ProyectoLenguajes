@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,30 @@
     </Compile>
     <Compile Include="Facturacion.Designer.cs">
       <DependentUpon>Facturacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EliminarProducto.Designer.cs">
+      <DependentUpon>EliminarProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaProducto.Designer.cs">
+      <DependentUpon>ConsultaProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificarProducto.Designer.cs">
+      <DependentUpon>ModificarProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InsertarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertarProducto.Designer.cs">
+      <DependentUpon>InsertarProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="InsertarCliente.cs">
       <SubType>Form</SubType>
@@ -96,11 +121,23 @@
     <Compile Include="ReporteFacturacion.Designer.cs">
       <DependentUpon>ReporteFacturacion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EliminarProducto.resx">
+      <DependentUpon>EliminarProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturacion.resx">
       <DependentUpon>Facturacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaProducto.resx">
+      <DependentUpon>ConsultaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificarProducto.resx">
+      <DependentUpon>ModificarProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InsertarCliente.resx">
       <DependentUpon>InsertarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InsertarProducto.resx">
+      <DependentUpon>InsertarProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MantenimientoClientes.resx">
       <DependentUpon>MantenimientoClientes.cs</DependentUpon>

@@ -3,7 +3,9 @@ using AccesoDatos2;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Linq;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,6 +97,100 @@ namespace AccesoDatos
             //txtApellido.Text = cliente.Correo;
             //txtApellido.Text = cliente.Nombre;
             //txtApellido.Text = cliente.NumeroTelefono;
+
+        }
+
+        //////////////////////////////////////////////////////////Producto
+        ///
+
+        public void eliminarProducto(int codigo)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            var eliminarProducto = from Producto in dc.Producto
+                                   where Producto.CodigoProducto == codigo
+                                   select Producto;
+            foreach (var Producto in eliminarProducto)
+            {
+                dc.Producto.DeleteOnSubmit(Producto);
+            }
+            try
+            {
+                dc.SubmitChanges();
+                MessageBox.Show("Se eliminó correctamente");
+                dc.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                dc.Connection.Close();
+            }
+
+        }
+
+        //public void actualizarProducto(int codigo, string desc, string correo, string nombre, string numeroTelefono)
+        //{
+        //    DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+        //    Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+        //    cliente.Nombre = nombre;
+        //    cliente.Apellido = apellido;
+        //    cliente.Correo = correo;
+        //    cliente.NumeroTelefono = numeroTelefono;
+        //    dc.SubmitChanges();
+        //    MessageBox.Show("Se actualizó correctamente");
+        //    dc.Connection.Close();
+        //}
+
+        public void InsertarProducto(int codigo, string desc, decimal precio, int cantidad)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            try
+            {
+                Producto producto = new Producto();
+                producto.CodigoProducto = codigo;
+                producto.Descripciom = desc;
+                producto.Precio = precio;
+                producto.CantidadInventario = cantidad;
+                dc.Producto.InsertOnSubmit(producto);
+                dc.SubmitChanges();
+                MessageBox.Show("Se insertó exitosamente");
+                dc.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                dc.Connection.Close();
+            }
+        }
+
+        public Table<Producto> consultaProducto()
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            DataTable MyTable = new DataTable();
+
+            return dc.Producto;
+
+            //Aqui se acomoda los datos del cliente--acomodar en la interfaz
+
+            //txtApellido.Text = cliente.Apellido;
+            //txtApellido.Text = cliente.Cedula;
+            //txtApellido.Text = cliente.Correo;
+            //txtApellido.Text = cliente.Nombre;
+            //txtApellido.Text = cliente.NumeroTelefono;
+
+            //}
 
         }
     }
