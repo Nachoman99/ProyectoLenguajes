@@ -51,7 +51,6 @@ namespace Interfaz
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ocurrió un error: " + ex.Message);
-                    throw;
                 }
             }
             else

@@ -27,11 +27,6 @@ namespace Interfaz
             dtgProduct.DataSource = gestor.consultaProducto();
         }
 
-        private void dtgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void ConsultaProducto_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Visible = false;

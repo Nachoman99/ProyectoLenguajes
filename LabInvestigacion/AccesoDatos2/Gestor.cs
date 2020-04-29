@@ -114,12 +114,14 @@ namespace AccesoDatos
             var eliminarProducto = from Producto in dc.Producto
                                    where Producto.CodigoProducto == codigo
                                    select Producto;
-            foreach (var Producto in eliminarProducto)
+            
+            try
+            {
+                foreach (var Producto in eliminarProducto)
             {
                 dc.Producto.DeleteOnSubmit(Producto);
             }
-            try
-            {
+
                 dc.SubmitChanges();
                 MessageBox.Show("Se eliminó correctamente");
                 dc.Connection.Close();
@@ -132,18 +134,30 @@ namespace AccesoDatos
 
         }
 
-        //public void actualizarProducto(int codigo, string desc, string correo, string nombre, string numeroTelefono)
-        //{
-        //    DataClasses1DataContext dc = new DataClasses1DataContext(connection);
-        //    Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
-        //    cliente.Nombre = nombre;
-        //    cliente.Apellido = apellido;
-        //    cliente.Correo = correo;
-        //    cliente.NumeroTelefono = numeroTelefono;
-        //    dc.SubmitChanges();
-        //    MessageBox.Show("Se actualizó correctamente");
-        //    dc.Connection.Close();
-        //}
+        public void actualizarProducto(int codigo, string desc, decimal precio, int cantidad)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Producto producto = dc.Producto.FirstOrDefault(clie => clie.CodigoProducto.Equals(codigo));
+
+            try
+            {
+                producto.Descripciom = desc;
+                producto.Precio = precio;
+                producto.CantidadInventario = cantidad;
+                dc.SubmitChanges();
+                MessageBox.Show("Se actualizó correctamente");
+                dc.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                dc.Connection.Close();
+            }
+            
+        }
 
         public void InsertarProducto(int codigo, string desc, decimal precio, int cantidad)
         {
@@ -171,6 +185,26 @@ namespace AccesoDatos
             }
         }
 
+        //Consulta Producto
+
+        public Producto ComprobarExistenciaProducto(int codigo)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            Producto producto = new Producto();
+            try
+            {
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
+            }
+            catch (Exception)
+            {
+                throw new Exception("No Existe el Código");
+            }
+            return producto;
+        }
+
         public Table<Producto> consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
@@ -189,9 +223,9 @@ namespace AccesoDatos
             //txtApellido.Text = cliente.Correo;
             //txtApellido.Text = cliente.Nombre;
             //txtApellido.Text = cliente.NumeroTelefono;
-
             //}
-
         }
+
+       
     }
 }
