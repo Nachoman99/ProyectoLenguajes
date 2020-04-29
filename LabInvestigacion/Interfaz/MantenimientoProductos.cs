@@ -57,5 +57,12 @@ namespace LabInvestigacion.Interfaz
             ConsultaProducto consP = new ConsultaProducto();
             consP.Show();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            ModificarProducto modP = new ModificarProducto();
+            modP.Show();
+        }
     }
 }

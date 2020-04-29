@@ -41,7 +41,6 @@
             this.dtgProduct.ReadOnly = true;
             this.dtgProduct.Size = new System.Drawing.Size(630, 323);
             this.dtgProduct.TabIndex = 0;
-            this.dtgProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgProduct_CellContentClick);
             // 
             // btBack
             // 
