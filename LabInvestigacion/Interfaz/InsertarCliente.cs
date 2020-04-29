@@ -29,7 +29,7 @@ namespace LabInvestigacion.Interfaz
             SqlConnection connection;
             SqlDataAdapter adapter = new SqlDataAdapter();
             String sql;
-            String ConnectionString = @"server=LAPTOP-3D7M2PMI\SQLSERVERDEV2019 ; database=LanguajesLab1 ; integrated security = true";
+            String ConnectionString = @"server=DESKTOP-8RGOI3B\SQLSERVERDEV2019 ; database=LanguajesLab1 ; integrated security = true";
             connection = new SqlConnection(ConnectionString);
             sql = "INSERT INTO dbo.Cliente (Cedula, Nombre, Apellido, Correo, NumeroTelefono) VALUES (" + int.Parse(txtCedula.Text) + ", '" + txtNombre.Text + "', '" + txtApellido.Text + "', '" + txtCorreo.Text + "', '" + txtTelefono.Text + "')";
             SqlCommand command;
