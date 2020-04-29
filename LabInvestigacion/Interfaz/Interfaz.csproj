@@ -77,6 +77,12 @@
     <Compile Include="ConsultaProducto.Designer.cs">
       <DependentUpon>ConsultaProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModificarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificarCliente.Designer.cs">
+      <DependentUpon>ModificarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModificarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     <EmbeddedResource Include="ConsultaProducto.resx">
       <DependentUpon>ConsultaProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModificarCliente.resx">
+      <DependentUpon>ModificarCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModificarProducto.resx">
       <DependentUpon>ModificarProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +187,10 @@
     <ProjectReference Include="..\AccesoDatos2\AccesoDatos.csproj">
       <Project>{9e48797b-644f-488d-93e4-7d079aa1a3c1}</Project>
       <Name>AccesoDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicaNegocio\LogicaNegocio.csproj">
+      <Project>{702017b7-4fc9-4220-b942-94bc9bd02c76}</Project>
+      <Name>LogicaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

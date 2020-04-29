@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaz;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,6 +43,13 @@ namespace LabInvestigacion.Interfaz
             this.Enabled = false;
             InsertarCliente insertar = new InsertarCliente();
             insertar.Visible = true;
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            ModificarCliente modificar = new ModificarCliente();
+            modificar.Visible = true;
         }
     }
 }

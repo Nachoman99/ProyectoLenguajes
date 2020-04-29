@@ -48,15 +48,52 @@ namespace AccesoDatos
 
         public void actualizarCliente(int cedula, string apellido, string correo, string nombre, string numeroTelefono)
         {
+            if (verificarCliente(cedula) is true)
+            {
+                DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+                Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+                cliente.Nombre = nombre;
+                cliente.Apellido = apellido;
+                cliente.Correo = correo;
+                cliente.NumeroTelefono = numeroTelefono;
+                dc.SubmitChanges();
+                MessageBox.Show("Se actualizó correctamente");
+                dc.Connection.Close();
+            }
+            else
+            {
+                MessageBox.Show("La cedula especificada no se encuentra");
+            }
+        }
+
+        public Cliente verCliente(int cedula)
+        {
+            string cliente;
+            if (verificarCliente(cedula) is true)
+            {
+                DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+                Cliente cliente1 = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+                return cliente1;
+            }
+            else
+            {
+                return null;
+            }
+           
+        }
+
+        private Boolean verificarCliente(int cedula)
+        {
             DataClasses1DataContext dc = new DataClasses1DataContext(connection);
-            Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
-            cliente.Nombre = nombre;
-            cliente.Apellido = apellido;
-            cliente.Correo = correo;
-            cliente.NumeroTelefono = numeroTelefono;
-            dc.SubmitChanges();
-            MessageBox.Show("Se actualizó correctamente");
-            dc.Connection.Close();
+            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+            if (cliente is null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void InsertarCliente(string apellido, int cedula, string correo, string nombre, string numeroTelefono)
