@@ -85,14 +85,14 @@ namespace AccesoDatos
         private Boolean verificarCliente(int cedula)
         {
             DataClasses1DataContext dc = new DataClasses1DataContext(connection);
-            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
-            if (cliente is null)
+            try
+            {
+                Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+                return true;
+            }
+            catch (Exception ex)
             {
                 return false;
-            }
-            else
-            {
-                return true;
             }
         }
 
