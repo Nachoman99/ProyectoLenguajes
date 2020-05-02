@@ -18,7 +18,10 @@ namespace LogicaNegocio
             gestor.eliminarProducto(codigo);
         }
 
-
+        public void insertarCliente(int cedula, string nombre, string apellido, string correo, string telefono)
+        {
+            gestor.InsertarCliente(apellido, cedula, correo, nombre, telefono);
+        }
 
         public void actualizarCliente(int cedula, string nombre, string correo, string telefono, string apellido)
         {

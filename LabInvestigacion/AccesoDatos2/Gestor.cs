@@ -16,8 +16,6 @@ namespace AccesoDatos
     public class Gestor
     {
 
-        SqlConnection connection = new SqlConnection(@"server= LAPTOP-3D7M2PMI\SQLSERVERDEV2019 ; database=LanguajesLab1 ; integrated security = true");
-
         public void ConectarBaseDatos(string nameServer, string database, string integratedSecurity)
         {
             SqlConnection connection = new SqlConnection(@"server=" + nameServer + " ; database=" + database + " ; integrated security =" + " " + integratedSecurity);
@@ -25,7 +23,9 @@ namespace AccesoDatos
 
         public void eliminarCliente(int cedula)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
             var clienteElminiar = from Cliente in dc.Cliente
                                   where Cliente.Cedula == cedula
                                   select Cliente;
@@ -50,8 +50,10 @@ namespace AccesoDatos
         {
             if (verificarCliente(cedula) is true)
             {
-                DataClasses1DataContext dc = new DataClasses1DataContext(connection);
-                Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+                LecturaArchivos lectura = new LecturaArchivos();
+                SqlConnection conexion = new SqlConnection(lectura.leerServer());
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
                 cliente.Nombre = nombre;
                 cliente.Apellido = apellido;
                 cliente.Correo = correo;
@@ -71,8 +73,10 @@ namespace AccesoDatos
             string cliente;
             if (verificarCliente(cedula) is true)
             {
-                DataClasses1DataContext dc = new DataClasses1DataContext(connection);
-                Cliente cliente1 = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+                LecturaArchivos lectura = new LecturaArchivos();
+                SqlConnection conexion = new SqlConnection(lectura.leerServer());
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                Cliente cliente1 = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
                 return cliente1;
             }
             else
@@ -83,7 +87,9 @@ namespace AccesoDatos
 
         private Boolean verificarCliente(int cedula)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
             try
             {
                 Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
@@ -97,7 +103,9 @@ namespace AccesoDatos
 
         public void InsertarCliente(string apellido, int cedula, string correo, string nombre, string numeroTelefono)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext(connection);
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
             Cliente cliente = new Cliente();
             cliente.Apellido = apellido;
             cliente.Cedula = cedula;
@@ -117,7 +125,7 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Cliente cliente = dc.Cliente.FirstOrDefault(clie => clie.Cedula.Equals(cedula));
+            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
             string cliente1;
             cliente1 = cliente.Cedula.ToString();
             cliente1 += " " + cliente.Nombre;
