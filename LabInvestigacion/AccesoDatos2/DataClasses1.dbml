@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LanguajesLab1" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ELZEPHYRO\SQLSERVERDEV2019;Initial Catalog=LanguajesLab1;Integrated Security=True" SettingsObjectName="LabInvestigacion.Properties.Settings" SettingsPropertyName="LanguajesLab1ConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-3D7M2PMI\SQLSERVERDEV2019;Initial Catalog=LanguajesLab1;Integrated Security=True" SettingsObjectName="AccesoDatos2.Properties.Settings" SettingsPropertyName="LanguajesLab1ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Cliente" Member="Cliente">
     <Type Name="Cliente">
       <Column Name="Cedula" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -7,6 +7,7 @@
       <Column Name="Apellido" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="NumeroTelefono" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IndicActivoCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Cliente_Factura" Member="Factura" ThisKey="Cedula" OtherKey="Cedula_Fk" Type="Factura" />
     </Type>
   </Table>
@@ -34,6 +35,7 @@
       <Column Name="Descripciom" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Precio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="CantidadInventario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IndicActivoProducto" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Producto_FacturaPorProducto" Member="FacturaPorProducto" ThisKey="CodigoProducto" OtherKey="CodigoProducto_Fk" Type="FacturaPorProducto" />
     </Type>
   </Table>

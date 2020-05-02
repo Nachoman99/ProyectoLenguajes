@@ -13,6 +13,13 @@ namespace LogicaNegocio
     {
         Gestor gestor = new Gestor();
 
+        public void eliminarProducto(int codigo)
+        {
+            gestor.eliminarProducto(codigo);
+        }
+
+
+
         public void actualizarCliente(int cedula, string nombre, string correo, string telefono, string apellido)
         {
             gestor.actualizarCliente(cedula, apellido, correo, nombre, telefono);

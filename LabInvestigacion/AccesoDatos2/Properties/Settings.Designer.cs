@@ -33,5 +33,16 @@ namespace AccesoDatos2.Properties {
                 return ((string)(this["LanguajesLab1ConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-3D7M2PMI\\SQLSERVERDEV2019;Initial Catalog=LanguajesLab1;Integr" +
+            "ated Security=True")]
+        public string LanguajesLab1ConnectionString {
+            get {
+                return ((string)(this["LanguajesLab1ConnectionString"]));
+            }
+        }
     }
 }

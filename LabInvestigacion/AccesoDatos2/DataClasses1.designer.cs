@@ -42,7 +42,7 @@ namespace AccesoDatos2
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::AccesoDatos2.Properties.Settings.Default.LanguajesLab1ConnectionString1, mappingSource)
+				base(global::AccesoDatos2.Properties.Settings.Default.LanguajesLab1ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -120,6 +120,8 @@ namespace AccesoDatos2
 		
 		private string _NumeroTelefono;
 		
+		private System.Nullable<int> _IndicActivoCliente;
+		
 		private EntitySet<Factura> _Factura;
 		
     #region Definiciones de métodos de extensibilidad
@@ -136,6 +138,8 @@ namespace AccesoDatos2
     partial void OnCorreoChanged();
     partial void OnNumeroTelefonoChanging(string value);
     partial void OnNumeroTelefonoChanged();
+    partial void OnIndicActivoClienteChanging(System.Nullable<int> value);
+    partial void OnIndicActivoClienteChanged();
     #endregion
 		
 		public Cliente()
@@ -240,6 +244,26 @@ namespace AccesoDatos2
 					this._NumeroTelefono = value;
 					this.SendPropertyChanged("NumeroTelefono");
 					this.OnNumeroTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndicActivoCliente", DbType="Int")]
+		public System.Nullable<int> IndicActivoCliente
+		{
+			get
+			{
+				return this._IndicActivoCliente;
+			}
+			set
+			{
+				if ((this._IndicActivoCliente != value))
+				{
+					this.OnIndicActivoClienteChanging(value);
+					this.SendPropertyChanging();
+					this._IndicActivoCliente = value;
+					this.SendPropertyChanged("IndicActivoCliente");
+					this.OnIndicActivoClienteChanged();
 				}
 			}
 		}
@@ -518,6 +542,8 @@ namespace AccesoDatos2
 		
 		private int _CantidadInventario;
 		
+		private System.Nullable<int> _IndicActivoProducto;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -530,6 +556,8 @@ namespace AccesoDatos2
     partial void OnPrecioChanged();
     partial void OnCantidadInventarioChanging(int value);
     partial void OnCantidadInventarioChanged();
+    partial void OnIndicActivoProductoChanging(System.Nullable<int> value);
+    partial void OnIndicActivoProductoChanged();
     #endregion
 		
 		public Producto()
@@ -613,6 +641,26 @@ namespace AccesoDatos2
 					this._CantidadInventario = value;
 					this.SendPropertyChanged("CantidadInventario");
 					this.OnCantidadInventarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndicActivoProducto", DbType="Int")]
+		public System.Nullable<int> IndicActivoProducto
+		{
+			get
+			{
+				return this._IndicActivoProducto;
+			}
+			set
+			{
+				if ((this._IndicActivoProducto != value))
+				{
+					this.OnIndicActivoProductoChanging(value);
+					this.SendPropertyChanging();
+					this._IndicActivoProducto = value;
+					this.SendPropertyChanged("IndicActivoProducto");
+					this.OnIndicActivoProductoChanged();
 				}
 			}
 		}

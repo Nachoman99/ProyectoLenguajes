@@ -79,7 +79,6 @@ namespace AccesoDatos
             {
                 return null;
             }
-           
         }
 
         private Boolean verificarCliente(int cedula)
@@ -139,37 +138,6 @@ namespace AccesoDatos
 
         //////////////////////////////////////////////////////////Producto
         ///
-
-        public void eliminarProducto(int codigo)
-        {
-            LecturaArchivos lectura = new LecturaArchivos();
-            DataTable MiDataTable = new DataTable();
-            SqlConnection conexion = new SqlConnection(lectura.leerServer());
-
-            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-
-            var eliminarProducto = from Producto in dc.Producto
-                                   where Producto.CodigoProducto == codigo
-                                   select Producto;
-            
-            try
-            {
-                foreach (var Producto in eliminarProducto)
-            {
-                dc.Producto.DeleteOnSubmit(Producto);
-            }
-
-                dc.SubmitChanges();
-                MessageBox.Show("Se eliminó correctamente");
-                dc.Connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
-                dc.Connection.Close();
-            }
-
-        }
 
         public void actualizarProducto(int codigo, string desc, decimal precio, int cantidad)
         {
@@ -263,6 +231,45 @@ namespace AccesoDatos
             //}
         }
 
-       
+        public void eliminarProducto(int codigo)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            var eliminarFacturaProducto = from intermedio in dc.FacturaPorProducto
+                                          where intermedio.CodigoProducto_Fk == codigo
+                                          select intermedio;
+            try
+            {
+                foreach (var intermedio in eliminarFacturaProducto)
+                {
+                    dc.FacturaPorProducto.DeleteOnSubmit(intermedio);
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            var eliminarProducto = from Producto in dc.Producto
+                                   where Producto.CodigoProducto == codigo
+                                   select Producto;
+            try
+            {
+                foreach (var Producto in eliminarProducto)
+                {
+                    dc.Producto.DeleteOnSubmit(Producto);
+                }
+                dc.SubmitChanges();
+                MessageBox.Show("Se eliminó correctamente");
+                dc.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                dc.Connection.Close();
+            }
+        }
     }
 }
