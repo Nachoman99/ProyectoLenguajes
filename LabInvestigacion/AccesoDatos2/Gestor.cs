@@ -145,7 +145,7 @@ namespace AccesoDatos
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Producto producto = dc.Producto.FirstOrDefault(clie => clie.CodigoProducto.Equals(codigo));
+            Producto producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
 
             try
             {
@@ -178,6 +178,7 @@ namespace AccesoDatos
                 producto.Descripciom = desc;
                 producto.Precio = precio;
                 producto.CantidadInventario = cantidad;
+                producto.IndicActivoProducto = 1;
                 dc.Producto.InsertOnSubmit(producto);
                 dc.SubmitChanges();
                 MessageBox.Show("Se insertó exitosamente");
@@ -233,36 +234,18 @@ namespace AccesoDatos
 
         public void eliminarProducto(int codigo)
         {
+           
             LecturaArchivos lectura = new LecturaArchivos();
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            var eliminarFacturaProducto = from intermedio in dc.FacturaPorProducto
-                                          where intermedio.CodigoProducto_Fk == codigo
-                                          select intermedio;
-            try
-            {
-                foreach (var intermedio in eliminarFacturaProducto)
-                {
-                    dc.FacturaPorProducto.DeleteOnSubmit(intermedio);
-                }
-                dc.SubmitChanges();
-            }
-            catch (Exception ex)
-            {
+            Producto producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
 
-            }
-            var eliminarProducto = from Producto in dc.Producto
-                                   where Producto.CodigoProducto == codigo
-                                   select Producto;
             try
             {
-                foreach (var Producto in eliminarProducto)
-                {
-                    dc.Producto.DeleteOnSubmit(Producto);
-                }
+                producto.IndicActivoProducto = 0;
                 dc.SubmitChanges();
-                MessageBox.Show("Se eliminó correctamente");
+                MessageBox.Show("Se elimino correctamente");
                 dc.Connection.Close();
             }
             catch (Exception ex)

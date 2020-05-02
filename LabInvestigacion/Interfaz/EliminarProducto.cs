@@ -40,6 +40,7 @@ namespace Interfaz
             {
                 try
                 {
+                    gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
                     gestor.eliminarProducto(int.Parse(txbCode.Text));
                 }
                 catch (Exception ex)
