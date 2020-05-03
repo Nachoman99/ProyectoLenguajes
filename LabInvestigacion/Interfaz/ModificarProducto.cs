@@ -1,6 +1,7 @@
 ﻿using AccesoDatos;
 using AccesoDatos2;
 using LabInvestigacion.Interfaz;
+using LogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace Interfaz
 {
     public partial class ModificarProducto : Form
     {
-        Gestor gestor = new Gestor();
+        MetodosInterfaz metodos = new MetodosInterfaz();
 
         public ModificarProducto()
         {
@@ -40,7 +41,7 @@ namespace Interfaz
             {
                 if (txbCode.Text != "")
                 {
-                    producto = gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
+                    producto = metodos.obtenerProducto(txbCode.Text);
                     txbDesc.Text = producto.Descripciom.ToString();
                     txbPrice.Text = "" + producto.Precio.ToString();
                     txbQuantity.Text = "" + producto.CantidadInventario.ToString();
@@ -68,7 +69,7 @@ namespace Interfaz
             {
                 if (txbDesc.Text != "" && txbPrice.Text != "" && txbQuantity.Text != "" )
                 {
-                    gestor.actualizarProducto(int.Parse(txbCode.Text), txbDesc.Text, decimal.Parse(txbPrice.Text), int.Parse(txbQuantity.Text));
+                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                     this.Visible = false;
                     MantenimientoProductos mantP = new MantenimientoProductos();
                     mantP.Show();

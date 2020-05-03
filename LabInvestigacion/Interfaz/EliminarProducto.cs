@@ -1,5 +1,6 @@
 ﻿using AccesoDatos;
 using LabInvestigacion.Interfaz;
+using LogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,11 @@ namespace Interfaz
     {
 
         Gestor gestor = new Gestor();
+        MetodosInterfaz metodos = new MetodosInterfaz();
 
         public EliminarProducto()
         {
             InitializeComponent();
-        }
-
-        private void EliminarProducto_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void EliminarProducto_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,8 +37,8 @@ namespace Interfaz
             {
                 try
                 {
-                    gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
-                    gestor.eliminarProducto(int.Parse(txbCode.Text));
+                    metodos.comprobarExistenciaProducto(txbCode.Text);
+                    metodos.eliminarProducto(txbCode.Text);
                     this.Visible = false;
                     MantenimientoProductos mantP = new MantenimientoProductos();
                     mantP.Show();

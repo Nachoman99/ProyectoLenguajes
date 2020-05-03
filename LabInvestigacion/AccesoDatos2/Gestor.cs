@@ -112,6 +112,7 @@ namespace AccesoDatos
             cliente.Correo = correo;
             cliente.Nombre = nombre;
             cliente.NumeroTelefono = numeroTelefono;
+            cliente.IndicActivoCliente = 1;
             dc.Cliente.InsertOnSubmit(cliente);
             dc.SubmitChanges();
             MessageBox.Show("Se insertó exitosamente");
@@ -222,14 +223,12 @@ namespace AccesoDatos
         public dynamic consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
-            DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
-
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            
+
             var productos = from producto in dc.Producto
                             where producto.IndicActivoProducto == 1
-                             select producto;
+                            select producto;
 
             return productos;
         }

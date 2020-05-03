@@ -1,5 +1,6 @@
 ﻿using AccesoDatos;
 using LabInvestigacion.Interfaz;
+using LogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace Interfaz
     public partial class ConsultaProducto : Form
     {
 
-        Gestor gestor = new Gestor();
+        MetodosInterfaz metodo = new MetodosInterfaz();
 
         public ConsultaProducto()
         {
@@ -24,7 +25,7 @@ namespace Interfaz
 
         private void ConsultaProducto_Load(object sender, EventArgs e)
         {
-            dtgProduct.DataSource = gestor.consultaProducto();
+            dtgProduct.DataSource = metodo.consultaProducto();
         }
 
         private void ConsultaProducto_FormClosing(object sender, FormClosingEventArgs e)

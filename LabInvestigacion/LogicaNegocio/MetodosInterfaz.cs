@@ -13,10 +13,9 @@ namespace LogicaNegocio
     {
         Gestor gestor = new Gestor();
 
-        public void eliminarProducto(int codigo)
-        {
-            gestor.eliminarProducto(codigo);
-        }
+        
+
+        //Cliente/////////////////////////////////////
 
         public void insertarCliente(int cedula, string nombre, string apellido, string correo, string telefono)
         {
@@ -70,6 +69,43 @@ namespace LogicaNegocio
             Cliente cliente = new Cliente();
             cliente = gestor.verCliente(cedula);
             return cliente.Nombre;
+        }
+
+        //Producto/////////////////////////////////////////////////////////////
+
+        public void eliminarProducto(int codigo)
+        {
+            gestor.eliminarProducto(codigo);
+        }
+
+        public dynamic consultaProducto()
+        {
+           return gestor.consultaProducto();
+        }
+
+        public void comprobarExistenciaProducto(String codigo)
+        {
+            gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+        }
+
+        public void eliminarProducto(String codigo)
+        {
+            gestor.eliminarProducto(int.Parse(codigo));
+        }
+
+        public void insertarProducto(String codigo, String desc, String precio, String cantidad)
+        {
+            gestor.InsertarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
+        }
+
+        public Producto obtenerProducto(String codigo)
+        {
+            return gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+        }
+
+        public void actualizarProducto(String codigo, String desc, String precio, String cantidad)
+        {
+            gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
         }
     }
 }
