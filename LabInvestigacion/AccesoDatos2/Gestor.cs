@@ -261,5 +261,53 @@ namespace AccesoDatos
                 dc.Connection.Close();
             }
         }
+
+
+        public void insertarFacturaPorProducto(int cantidadProducto, int codigoProducto, int codigoFactura)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            FacturaPorProducto factura_x_Producto = new FacturaPorProducto();
+            factura_x_Producto.CantidadProducto = cantidadProducto;
+            factura_x_Producto.CodigoProducto_Fk = codigoProducto;
+            factura_x_Producto.CodigoFactura_Fk = codigoFactura;
+            dc.FacturaPorProducto.InsertOnSubmit(factura_x_Producto);
+            dc.SubmitChanges();
+            MessageBox.Show("Se insertó exitosamente");
+            dc.Connection.Close();
+        }
+
+
+        public void insertarFactura(int codigo, int cedula)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Factura factura = new Factura();
+            factura.CodigoFactura = codigo;
+            factura.Cedula_Fk = cedula;
+            factura.FechaFactura = GetDateTime();
+            dc.Factura.InsertOnSubmit(factura);
+            dc.SubmitChanges();
+            MessageBox.Show("Se insertó exitosamente");
+            dc.Connection.Close();
+        }
+
+        public DateTime GetDateTime()
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            
+            using (DataClasses1DataContext dc = new DataClasses1DataContext(conexion))
+            {
+                var dQuery = dc.ExecuteQuery<DateTime>("SELECT getdate()");
+                return dQuery.AsEnumerable().First();
+            }
+        }
+
     }
 }
