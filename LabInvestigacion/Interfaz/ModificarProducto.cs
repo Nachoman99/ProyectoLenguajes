@@ -1,6 +1,7 @@
 ﻿using AccesoDatos;
 using AccesoDatos2;
 using LabInvestigacion.Interfaz;
+using LogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace Interfaz
 {
     public partial class ModificarProducto : Form
     {
-        Gestor gestor = new Gestor();
+        MetodosInterfaz metodos = new MetodosInterfaz();
 
         public ModificarProducto()
         {
@@ -35,23 +36,30 @@ namespace Interfaz
         private void btCheck_Click(object sender, EventArgs e)
         {
             Producto producto;
-
             try
             {
                 if (txbCode.Text != "")
                 {
-                    producto = gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
-                    txbDesc.Text = producto.Descripciom.ToString();
-                    txbPrice.Text = "" + producto.Precio.ToString();
-                    txbQuantity.Text = "" + producto.CantidadInventario.ToString();
-                    txbCode.Enabled = false;
-                    btCheck.Enabled = false;
-                    txbDesc.Enabled = true;
-                    txbPrice.Enabled = true;
-                    txbQuantity.Enabled = true;
-                    btModify.Enabled = true;
-                    label1.Text = "";
-                } else
+                    producto = metodos.obtenerProducto(txbCode.Text);
+                    if (metodos.productoExistencteFisico(txbCode.Text))
+                    {
+                        txbDesc.Text = producto.Descripciom.ToString();
+                        txbPrice.Text = "" + producto.Precio.ToString();
+                        txbQuantity.Text = "" + producto.CantidadInventario.ToString();
+                        txbCode.Enabled = false;
+                        btCheck.Enabled = false;
+                        txbDesc.Enabled = true;
+                        txbPrice.Enabled = true;
+                        txbQuantity.Enabled = true;
+                        btModify.Enabled = true;
+                        label1.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Existe el Código");
+                    }
+                }
+                else
                 {
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
@@ -68,7 +76,7 @@ namespace Interfaz
             {
                 if (txbDesc.Text != "" && txbPrice.Text != "" && txbQuantity.Text != "" )
                 {
-                    gestor.actualizarProducto(int.Parse(txbCode.Text), txbDesc.Text, decimal.Parse(txbPrice.Text), int.Parse(txbQuantity.Text));
+                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                     this.Visible = false;
                     MantenimientoProductos mantP = new MantenimientoProductos();
                     mantP.Show();
@@ -77,11 +85,9 @@ namespace Interfaz
                 {
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
-                
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }

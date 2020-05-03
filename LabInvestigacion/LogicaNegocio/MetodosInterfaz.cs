@@ -2,12 +2,10 @@
 using AccesoDatos2;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LogicaNegocio
 {
@@ -15,15 +13,9 @@ namespace LogicaNegocio
     {
         Gestor gestor = new Gestor();
 
-        public dynamic consultaCliente()
-        {
-            return gestor.consultaCliente();
-        }
 
-        public void eliminarProducto(int codigo)
-        {
-            gestor.eliminarProducto(codigo);
-        }
+
+        //Cliente/////////////////////////////////////
 
         public void insertarCliente(int cedula, string nombre, string apellido, string correo, string telefono)
         {
@@ -78,5 +70,54 @@ namespace LogicaNegocio
             cliente = gestor.verCliente(cedula);
             return cliente.Nombre;
         }
+
+        //Producto/////////////////////////////////////////////////////////////
+
+        public void eliminarProducto(int codigo)
+        {
+            gestor.eliminarProducto(codigo);
+        }
+
+        public dynamic consultaProducto()
+        {
+            return gestor.consultaProducto();
+        }
+
+        public void comprobarExistenciaProducto(String codigo)
+        {
+            gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+        }
+
+        public void eliminarProducto(String codigo)
+        {
+            gestor.eliminarProducto(int.Parse(codigo));
+        }
+
+        public void insertarProducto(String codigo, String desc, String precio, String cantidad)
+        {
+            gestor.InsertarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
+        }
+
+        public Producto obtenerProducto(String codigo)
+        {
+            return gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+        }
+
+        public void actualizarProducto(String codigo, String desc, String precio, String cantidad)
+        {
+            gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
+        }
+
+        public Boolean productoExistencteFisico(String codigo)
+        {
+            Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+            if (producto.IndicActivoProducto != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

@@ -150,7 +150,6 @@
             this.Controls.Add(this.lblCedula);
             this.Name = "InsertarCliente";
             this.Text = "Insertar Cliente";
-            this.Load += new System.EventHandler(this.InsertarCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

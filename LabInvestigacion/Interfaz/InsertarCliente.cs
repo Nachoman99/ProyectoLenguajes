@@ -16,34 +16,23 @@ namespace LabInvestigacion.Interfaz
 {
     public partial class InsertarCliente : Form
     {
+        MetodosInterfaz metodos = new MetodosInterfaz();
+
         public InsertarCliente()
         {
             InitializeComponent();
         }
 
-        private void InsertarCliente_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            MetodosInterfaz metodos = new MetodosInterfaz();
-            metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
-        }
-
-        public string leerServer()
-        {
-            string fichero = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rutaCoca.txt"));
-            string server = "";
-            StreamReader reader = new StreamReader(fichero);
-            string[] line;
-
-            if (File.Exists(fichero))
+            if (txtCorreo.Text.Contains("@"))
             {
-                server = reader.ReadToEnd();
+                metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
             }
-            return server;
+            else
+            {
+                MessageBox.Show("Debe de Introducir un Correo Válido");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AccesoDatos;
 using LabInvestigacion.Interfaz;
+using LogicaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,11 @@ namespace Interfaz
     {
 
         Gestor gestor = new Gestor();
+        MetodosInterfaz metodos = new MetodosInterfaz();
 
         public EliminarProducto()
         {
             InitializeComponent();
-        }
-
-        private void EliminarProducto_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void EliminarProducto_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,19 +37,22 @@ namespace Interfaz
             {
                 try
                 {
-                    gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
-                    gestor.eliminarProducto(int.Parse(txbCode.Text));
-                    this.Visible = false;
-                    MantenimientoProductos mantP = new MantenimientoProductos();
-                    mantP.Show();
+                    if (metodos.productoExistencteFisico(txbCode.Text))
+                    {
+                        //metodos.comprobarExistenciaProducto(txbCode.Text);
+                        metodos.eliminarProducto(txbCode.Text);
+                        this.Visible = false;
+                        MantenimientoProductos mantP = new MantenimientoProductos();
+                        mantP.Show();
+                    }
+                    else
+
+                        lbError.Text = "Debe de Completar Todos los Espacios";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocurrió un error: " + ex.Message);
+                    //MessageBox.Show("Ocurrió un error: " + ex.Message);
                 }
-            }else
-            {
-                lbError.Text = "Debe de Completar Todos los Espacios";
             }
         }
 

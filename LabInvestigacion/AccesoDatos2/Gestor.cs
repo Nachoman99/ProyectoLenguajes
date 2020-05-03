@@ -112,37 +112,38 @@ namespace AccesoDatos
             cliente.Correo = correo;
             cliente.Nombre = nombre;
             cliente.NumeroTelefono = numeroTelefono;
+            cliente.IndicActivoCliente = 1;
             dc.Cliente.InsertOnSubmit(cliente);
             dc.SubmitChanges();
             MessageBox.Show("Se insertó exitosamente");
             dc.Connection.Close();
         }
 
-        //public string consultaCliente(int cedula)
-        //{
-        //    LecturaArchivos lectura = new LecturaArchivos();
-        //    DataTable MiDataTable = new DataTable();
-        //    SqlConnection conexion = new SqlConnection(lectura.leerServer());
+        public string consultaCliente(int cedula)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
-        //    DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-        //    Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
-        //    string cliente1;
-        //    cliente1 = cliente.Cedula.ToString();
-        //    cliente1 += " " + cliente.Nombre;
-        //    cliente1 += " " + cliente.Apellido;
-        //    cliente1 += " " + cliente.Correo;
-        //    cliente1 += " " + cliente.NumeroTelefono;
-        //    return cliente1;
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+            string cliente1;
+            cliente1 = cliente.Cedula.ToString();
+            cliente1 += " " + cliente.Nombre;
+            cliente1 += " " + cliente.Apellido;
+            cliente1 += " " + cliente.Correo;
+            cliente1 += " " + cliente.NumeroTelefono;
+            return cliente1;
 
-        //    //Aqui se acomoda los datos del cliente--acomodar en la interfaz
+            //Aqui se acomoda los datos del cliente--acomodar en la interfaz
 
-        //    //txtApellido.Text = cliente.Apellido;
-        //    //txtApellido.Text = cliente.Cedula;
-        //    //txtApellido.Text = cliente.Correo;
-        //    //txtApellido.Text = cliente.Nombre;
-        //    //txtApellido.Text = cliente.NumeroTelefono;
+            //txtApellido.Text = cliente.Apellido;
+            //txtApellido.Text = cliente.Cedula;
+            //txtApellido.Text = cliente.Correo;
+            //txtApellido.Text = cliente.Nombre;
+            //txtApellido.Text = cliente.NumeroTelefono;
 
-        //}
+        }
 
         //////////////////////////////////////////////////////////Producto
         ///
@@ -159,7 +160,8 @@ namespace AccesoDatos
             {
                 producto.Descripciom = desc;
                 producto.Precio = precio;
-                producto.CantidadInventario = cantidad;
+                producto.CantidadInventario += cantidad;
+                producto.IndicActivoProducto = 1;
                 dc.SubmitChanges();
                 MessageBox.Show("Se actualizó correctamente");
                 dc.Connection.Close();
@@ -178,23 +180,27 @@ namespace AccesoDatos
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Producto tempProduct = ComprobarExistenciaProducto(codigo);
 
             try
             {
-                Producto producto = new Producto();
-                producto.CodigoProducto = codigo;
-                producto.Descripciom = desc;
-                producto.Precio = precio;
-                producto.CantidadInventario = cantidad;
-                producto.IndicActivoProducto = 1;
-                dc.Producto.InsertOnSubmit(producto);
-                dc.SubmitChanges();
-                MessageBox.Show("Se insertó exitosamente");
-                dc.Connection.Close();
+                if (tempProduct != null)
+                {
+                    Producto producto = new Producto();
+                    producto.CodigoProducto = codigo;
+                    producto.Descripciom = desc;
+                    producto.Precio = precio;
+                    producto.CantidadInventario = cantidad;
+                    producto.IndicActivoProducto = 1;
+                    dc.Producto.InsertOnSubmit(producto);
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se insertó exitosamente");
+                    dc.Connection.Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("Ocurrió un error: Este Producto ya Existe");
                 dc.Connection.Close();
             }
         }
@@ -212,30 +218,16 @@ namespace AccesoDatos
                 DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
                 producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("No Existe el Código");
+                MessageBox.Show("Ocurrio un Error: " + ex.Message);
             }
             return producto;
-        }
-
-        public dynamic consultaCliente()
-        {
-            LecturaArchivos lectura = new LecturaArchivos();
-            SqlConnection conexion = new SqlConnection(lectura.leerServer());
-
-            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-
-            var clientes = from cliente in dc.Cliente
-                           where cliente.IndicActivoCliente == 1
-                           select cliente;
-            return clientes;
         }
 
         public dynamic consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
-            DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);

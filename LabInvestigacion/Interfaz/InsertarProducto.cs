@@ -19,13 +19,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccesoDatos;
+using LogicaNegocio;
 
 namespace Interfaz
 {
     public partial class InsertarProducto : Form
     {
-
-        Gestor gestor = new Gestor();
+        MetodosInterfaz metodos = new MetodosInterfaz();
 
         public InsertarProducto()
         {
@@ -43,14 +43,21 @@ namespace Interfaz
         {
             if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
             {
-                try
+                if(metodos.productoExistencteFisico(txbCode.Text))
                 {
-                    gestor.InsertarProducto(int.Parse(txbCode.Text), txbDesc.Text, decimal.Parse(txbPrice.Text),int.Parse(txbQuantity.Text));
-                    label1.Text = "";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocurrió un error: " + ex.Message);
+                    try
+                    {
+                        metodos.insertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                        this.Visible = false;
+                        MantenimientoProductos mantP = new MantenimientoProductos();
+                        mantP.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocurrió un error:" + ex.Message);
+                    }
+                }else {
+                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                 }
             }
             else
