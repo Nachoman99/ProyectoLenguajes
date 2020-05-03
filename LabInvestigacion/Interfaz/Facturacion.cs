@@ -15,7 +15,7 @@ namespace LabInvestigacion.Interfaz
     public partial class Facturacion : Form
     {
         Gestor gestor = new Gestor();
-        int codigoFact = 15;
+
         public Facturacion()
         {
             InitializeComponent();
@@ -37,19 +37,21 @@ namespace LabInvestigacion.Interfaz
 
         private void Facturacion_Load(object sender, EventArgs e)
         {
-            ++codigoFact;
+
         }
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
+            int codigoFactura = gestor.GetLastIdFactura().CodigoFactura + 1;  
+            gestor.insertarFactura(codigoFactura, int.Parse(txtIngreseClientID.Text));
             this.Visible = false;
-            AgregarProductos addProducts = new AgregarProductos(codigoFact);
+            AgregarProductos addProducts = new AgregarProductos(codigoFactura);
             addProducts.Visible = true;
         }
 
         private void btnCrearFact_Click(object sender, EventArgs e)
         {
-            gestor.insertarFactura(codigoFact, int.Parse(txtIngreseClientID.Text));
+            MessageBox.Show("Se ha creado la factura exitosamente");
             this.Visible = false;
             MenuPrincipal menu = new MenuPrincipal();
             menu.Visible = true;

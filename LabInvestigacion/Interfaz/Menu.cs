@@ -33,7 +33,7 @@ namespace LabInvestigacion.Interfaz
 
         private void btnFacturación_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
+            this.Visible = false;
             Facturacion facturacion = new Facturacion();
             facturacion.Visible = true;
         }
