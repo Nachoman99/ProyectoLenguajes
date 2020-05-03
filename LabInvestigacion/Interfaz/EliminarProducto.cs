@@ -42,6 +42,9 @@ namespace Interfaz
                 {
                     gestor.ComprobarExistenciaProducto(int.Parse(txbCode.Text));
                     gestor.eliminarProducto(int.Parse(txbCode.Text));
+                    this.Visible = false;
+                    MantenimientoProductos mantP = new MantenimientoProductos();
+                    mantP.Show();
                 }
                 catch (Exception ex)
                 {

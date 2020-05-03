@@ -219,25 +219,19 @@ namespace AccesoDatos
             return producto;
         }
 
-        public Table<Producto> consultaProducto()
+        public dynamic consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            DataTable MyTable = new DataTable();
+            
+            var productos = from producto in dc.Producto
+                            where producto.IndicActivoProducto == 1
+                             select producto;
 
-            return dc.Producto;
-
-            //Aqui se acomoda los datos del cliente--acomodar en la interfaz
-
-            //txtApellido.Text = cliente.Apellido;
-            //txtApellido.Text = cliente.Cedula;
-            //txtApellido.Text = cliente.Correo;
-            //txtApellido.Text = cliente.Nombre;
-            //txtApellido.Text = cliente.NumeroTelefono;
-            //}
+            return productos;
         }
 
         public void eliminarProducto(int codigo)

@@ -13,7 +13,7 @@ namespace AccesoDatos
 
         public string leerServer()
         {
-            string fichero = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rutaJuanca.txt"));
+            string fichero = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rutaNacho.txt"));
             string server = "";
             StreamReader reader = new StreamReader(fichero);
             string[] line;
