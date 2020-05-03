@@ -220,7 +220,7 @@ namespace AccesoDatos
             return producto;
         }
 
-        public dynamic consultaProducto()
+        public Table<Producto> consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
