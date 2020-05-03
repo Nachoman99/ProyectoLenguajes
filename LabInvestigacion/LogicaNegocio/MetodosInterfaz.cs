@@ -13,7 +13,7 @@ namespace LogicaNegocio
     {
         Gestor gestor = new Gestor();
 
-        
+
 
         //Cliente/////////////////////////////////////
 
@@ -80,7 +80,7 @@ namespace LogicaNegocio
 
         public dynamic consultaProducto()
         {
-           return gestor.consultaProducto();
+            return gestor.consultaProducto();
         }
 
         public void comprobarExistenciaProducto(String codigo)
@@ -107,5 +107,17 @@ namespace LogicaNegocio
         {
             gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
         }
+
+        public Boolean productoExistencteFisico(String codigo)
+        {
+            Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+            if (producto.IndicActivoProducto != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

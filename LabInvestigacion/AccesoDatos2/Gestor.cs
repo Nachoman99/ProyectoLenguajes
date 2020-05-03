@@ -160,7 +160,8 @@ namespace AccesoDatos
             {
                 producto.Descripciom = desc;
                 producto.Precio = precio;
-                producto.CantidadInventario = cantidad;
+                producto.CantidadInventario += cantidad;
+                producto.IndicActivoProducto = 1;
                 dc.SubmitChanges();
                 MessageBox.Show("Se actualizó correctamente");
                 dc.Connection.Close();
@@ -179,23 +180,27 @@ namespace AccesoDatos
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Producto tempProduct = ComprobarExistenciaProducto(codigo);
 
             try
             {
-                Producto producto = new Producto();
-                producto.CodigoProducto = codigo;
-                producto.Descripciom = desc;
-                producto.Precio = precio;
-                producto.CantidadInventario = cantidad;
-                producto.IndicActivoProducto = 1;
-                dc.Producto.InsertOnSubmit(producto);
-                dc.SubmitChanges();
-                MessageBox.Show("Se insertó exitosamente");
-                dc.Connection.Close();
+                if (tempProduct != null)
+                {
+                    Producto producto = new Producto();
+                    producto.CodigoProducto = codigo;
+                    producto.Descripciom = desc;
+                    producto.Precio = precio;
+                    producto.CantidadInventario = cantidad;
+                    producto.IndicActivoProducto = 1;
+                    dc.Producto.InsertOnSubmit(producto);
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se insertó exitosamente");
+                    dc.Connection.Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("Ocurrió un error: Este Producto ya Existe");
                 dc.Connection.Close();
             }
         }
@@ -213,17 +218,18 @@ namespace AccesoDatos
                 DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
                 producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("No Existe el Código");
+                MessageBox.Show("Ocurrio un Error: " + ex.Message);
             }
             return producto;
         }
 
-        public Table<Producto> consultaProducto()
+        public dynamic consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
 
             var productos = from producto in dc.Producto

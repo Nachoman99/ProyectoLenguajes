@@ -43,16 +43,21 @@ namespace Interfaz
         {
             if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
             {
-                try
+                if(metodos.productoExistencteFisico(txbCode.Text))
                 {
-                    metodos.insertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
-                    this.Visible = false;
-                    MantenimientoProductos mantP = new MantenimientoProductos();
-                    mantP.Show();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocurrió un error: " + ex.Message);
+                    try
+                    {
+                        metodos.insertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                        this.Visible = false;
+                        MantenimientoProductos mantP = new MantenimientoProductos();
+                        mantP.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocurrió un error:" + ex.Message);
+                    }
+                }else {
+                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                 }
             }
             else

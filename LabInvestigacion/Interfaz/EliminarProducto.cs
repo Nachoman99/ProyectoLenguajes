@@ -37,19 +37,22 @@ namespace Interfaz
             {
                 try
                 {
-                    metodos.comprobarExistenciaProducto(txbCode.Text);
-                    metodos.eliminarProducto(txbCode.Text);
-                    this.Visible = false;
-                    MantenimientoProductos mantP = new MantenimientoProductos();
-                    mantP.Show();
+                    if (metodos.productoExistencteFisico(txbCode.Text))
+                    {
+                        //metodos.comprobarExistenciaProducto(txbCode.Text);
+                        metodos.eliminarProducto(txbCode.Text);
+                        this.Visible = false;
+                        MantenimientoProductos mantP = new MantenimientoProductos();
+                        mantP.Show();
+                    }
+                    else
+
+                        lbError.Text = "Debe de Completar Todos los Espacios";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocurrió un error: " + ex.Message);
+                    //MessageBox.Show("Ocurrió un error: " + ex.Message);
                 }
-            }else
-            {
-                lbError.Text = "Debe de Completar Todos los Espacios";
             }
         }
 

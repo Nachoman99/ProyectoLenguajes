@@ -36,23 +36,30 @@ namespace Interfaz
         private void btCheck_Click(object sender, EventArgs e)
         {
             Producto producto;
-
             try
             {
                 if (txbCode.Text != "")
                 {
                     producto = metodos.obtenerProducto(txbCode.Text);
-                    txbDesc.Text = producto.Descripciom.ToString();
-                    txbPrice.Text = "" + producto.Precio.ToString();
-                    txbQuantity.Text = "" + producto.CantidadInventario.ToString();
-                    txbCode.Enabled = false;
-                    btCheck.Enabled = false;
-                    txbDesc.Enabled = true;
-                    txbPrice.Enabled = true;
-                    txbQuantity.Enabled = true;
-                    btModify.Enabled = true;
-                    label1.Text = "";
-                } else
+                    if (metodos.productoExistencteFisico(txbCode.Text))
+                    {
+                        txbDesc.Text = producto.Descripciom.ToString();
+                        txbPrice.Text = "" + producto.Precio.ToString();
+                        txbQuantity.Text = "" + producto.CantidadInventario.ToString();
+                        txbCode.Enabled = false;
+                        btCheck.Enabled = false;
+                        txbDesc.Enabled = true;
+                        txbPrice.Enabled = true;
+                        txbQuantity.Enabled = true;
+                        btModify.Enabled = true;
+                        label1.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Existe el Código");
+                    }
+                }
+                else
                 {
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
@@ -78,11 +85,9 @@ namespace Interfaz
                 {
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
-                
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
