@@ -2,16 +2,23 @@
 using AccesoDatos2;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LogicaNegocio
 {
     public class MetodosInterfaz
     {
         Gestor gestor = new Gestor();
+
+        public dynamic consultaCliente()
+        {
+            return gestor.consultaCliente();
+        }
 
         public void eliminarProducto(int codigo)
         {

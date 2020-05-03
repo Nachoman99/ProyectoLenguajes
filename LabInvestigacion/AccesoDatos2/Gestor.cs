@@ -118,31 +118,31 @@ namespace AccesoDatos
             dc.Connection.Close();
         }
 
-        public string consultaCliente(int cedula)
-        {
-            LecturaArchivos lectura = new LecturaArchivos();
-            DataTable MiDataTable = new DataTable();
-            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+        //public string consultaCliente(int cedula)
+        //{
+        //    LecturaArchivos lectura = new LecturaArchivos();
+        //    DataTable MiDataTable = new DataTable();
+        //    SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
-            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
-            string cliente1;
-            cliente1 = cliente.Cedula.ToString();
-            cliente1 += " " + cliente.Nombre;
-            cliente1 += " " + cliente.Apellido;
-            cliente1 += " " + cliente.Correo;
-            cliente1 += " " + cliente.NumeroTelefono;
-            return cliente1;
+        //    DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+        //    Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+        //    string cliente1;
+        //    cliente1 = cliente.Cedula.ToString();
+        //    cliente1 += " " + cliente.Nombre;
+        //    cliente1 += " " + cliente.Apellido;
+        //    cliente1 += " " + cliente.Correo;
+        //    cliente1 += " " + cliente.NumeroTelefono;
+        //    return cliente1;
 
-            //Aqui se acomoda los datos del cliente--acomodar en la interfaz
+        //    //Aqui se acomoda los datos del cliente--acomodar en la interfaz
 
-            //txtApellido.Text = cliente.Apellido;
-            //txtApellido.Text = cliente.Cedula;
-            //txtApellido.Text = cliente.Correo;
-            //txtApellido.Text = cliente.Nombre;
-            //txtApellido.Text = cliente.NumeroTelefono;
+        //    //txtApellido.Text = cliente.Apellido;
+        //    //txtApellido.Text = cliente.Cedula;
+        //    //txtApellido.Text = cliente.Correo;
+        //    //txtApellido.Text = cliente.Nombre;
+        //    //txtApellido.Text = cliente.NumeroTelefono;
 
-        }
+        //}
 
         //////////////////////////////////////////////////////////Producto
         ///
@@ -219,17 +219,30 @@ namespace AccesoDatos
             return producto;
         }
 
-        public Table<Producto> consultaProducto()
+        public dynamic consultaCliente()
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            var clientes = from cliente in dc.Cliente
+                           where cliente.IndicActivoCliente == 1
+                           select cliente;
+            return clientes;
+        }
+
+        public dynamic consultaProducto()
         {
             LecturaArchivos lectura = new LecturaArchivos();
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
 
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            
+
             var productos = from producto in dc.Producto
                             where producto.IndicActivoProducto == 1
-                             select producto;
+                            select producto;
 
             return productos;
         }

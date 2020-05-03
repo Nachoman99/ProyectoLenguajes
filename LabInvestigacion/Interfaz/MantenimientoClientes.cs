@@ -51,5 +51,12 @@ namespace LabInvestigacion.Interfaz
             ModificarCliente modificar = new ModificarCliente();
             modificar.Visible = true;
         }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            ConsultarCliente consultarCliente = new ConsultarCliente();
+            this.Visible = false;
+            consultarCliente.Show();
+        }
     }
 }
