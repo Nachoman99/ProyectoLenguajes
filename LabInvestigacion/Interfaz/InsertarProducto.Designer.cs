@@ -45,18 +45,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(11, 209);
+            this.label1.Location = new System.Drawing.Point(15, 257);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 45;
             // 
             // btBack
             // 
             this.btBack.AutoSize = true;
-            this.btBack.Location = new System.Drawing.Point(330, 272);
-            this.btBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btBack.Location = new System.Drawing.Point(440, 335);
+            this.btBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btBack.Name = "btBack";
-            this.btBack.Size = new System.Drawing.Size(90, 29);
+            this.btBack.Size = new System.Drawing.Size(120, 36);
             this.btBack.TabIndex = 44;
             this.btBack.Text = "Atras";
             this.btBack.UseVisualStyleBackColor = true;
@@ -65,10 +66,10 @@
             // btInsert
             // 
             this.btInsert.AutoSize = true;
-            this.btInsert.Location = new System.Drawing.Point(9, 272);
-            this.btInsert.Margin = new System.Windows.Forms.Padding(2);
+            this.btInsert.Location = new System.Drawing.Point(12, 335);
+            this.btInsert.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btInsert.Name = "btInsert";
-            this.btInsert.Size = new System.Drawing.Size(90, 29);
+            this.btInsert.Size = new System.Drawing.Size(120, 36);
             this.btInsert.TabIndex = 43;
             this.btInsert.Text = "Insertar";
             this.btInsert.UseVisualStyleBackColor = true;
@@ -76,81 +77,77 @@
             // 
             // txbPrice
             // 
-            this.txbPrice.Location = new System.Drawing.Point(147, 114);
-            this.txbPrice.Margin = new System.Windows.Forms.Padding(2);
+            this.txbPrice.Location = new System.Drawing.Point(196, 140);
+            this.txbPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbPrice.Name = "txbPrice";
-            this.txbPrice.Size = new System.Drawing.Size(229, 20);
+            this.txbPrice.Size = new System.Drawing.Size(304, 22);
             this.txbPrice.TabIndex = 42;
             // 
             // txbDesc
             // 
-            this.txbDesc.Location = new System.Drawing.Point(125, 65);
-            this.txbDesc.Margin = new System.Windows.Forms.Padding(2);
+            this.txbDesc.Location = new System.Drawing.Point(167, 80);
+            this.txbDesc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbDesc.Name = "txbDesc";
-            this.txbDesc.Size = new System.Drawing.Size(229, 20);
+            this.txbDesc.Size = new System.Drawing.Size(304, 22);
             this.txbDesc.TabIndex = 41;
             // 
             // txbQuantity
             // 
-            this.txbQuantity.Location = new System.Drawing.Point(178, 164);
-            this.txbQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.txbQuantity.Location = new System.Drawing.Point(237, 202);
+            this.txbQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbQuantity.Name = "txbQuantity";
-            this.txbQuantity.Size = new System.Drawing.Size(231, 20);
+            this.txbQuantity.Size = new System.Drawing.Size(307, 22);
             this.txbQuantity.TabIndex = 40;
             // 
             // txbCode
             // 
-            this.txbCode.Location = new System.Drawing.Point(101, 17);
-            this.txbCode.Margin = new System.Windows.Forms.Padding(2);
+            this.txbCode.Location = new System.Drawing.Point(135, 21);
+            this.txbCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbCode.Name = "txbCode";
-            this.txbCode.Size = new System.Drawing.Size(229, 20);
+            this.txbCode.Size = new System.Drawing.Size(304, 22);
             this.txbCode.TabIndex = 39;
             // 
             // lblCorreo
             // 
             this.lblCorreo.AutoSize = true;
-            this.lblCorreo.Location = new System.Drawing.Point(11, 167);
-            this.lblCorreo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCorreo.Location = new System.Drawing.Point(15, 206);
             this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(163, 13);
+            this.lblCorreo.Size = new System.Drawing.Size(216, 17);
             this.lblCorreo.TabIndex = 38;
             this.lblCorreo.Text = "Inserte la Cantidad en Inventario:";
             // 
             // lblapellido
             // 
             this.lblapellido.AutoSize = true;
-            this.lblapellido.Location = new System.Drawing.Point(11, 117);
-            this.lblapellido.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblapellido.Location = new System.Drawing.Point(15, 144);
             this.lblapellido.Name = "lblapellido";
-            this.lblapellido.Size = new System.Drawing.Size(132, 13);
+            this.lblapellido.Size = new System.Drawing.Size(175, 17);
             this.lblapellido.TabIndex = 37;
             this.lblapellido.Text = "Inserte el Precio de Venta:";
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(11, 68);
-            this.lblNombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNombre.Location = new System.Drawing.Point(15, 84);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(112, 13);
+            this.lblNombre.Size = new System.Drawing.Size(148, 17);
             this.lblNombre.TabIndex = 36;
             this.lblNombre.Text = "Inserte la Descripción:";
             // 
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(11, 20);
-            this.lblCedula.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCedula.Location = new System.Drawing.Point(15, 25);
             this.lblCedula.Name = "lblCedula";
-            this.lblCedula.Size = new System.Drawing.Size(89, 13);
+            this.lblCedula.Size = new System.Drawing.Size(118, 17);
             this.lblCedula.TabIndex = 35;
             this.lblCedula.Text = "Inserte el Código:";
             // 
             // InsertarProducto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 334);
+            this.ClientSize = new System.Drawing.Size(575, 411);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btBack);
             this.Controls.Add(this.btInsert);
@@ -162,9 +159,11 @@
             this.Controls.Add(this.lblapellido);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCedula);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InsertarProducto";
             this.Text = "Insertar Producto";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InsertarProducto_FormClosing_1);
+            this.Load += new System.EventHandler(this.InsertarProducto_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

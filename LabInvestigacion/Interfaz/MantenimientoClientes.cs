@@ -58,5 +58,12 @@ namespace LabInvestigacion.Interfaz
             this.Visible = false;
             consultarCliente.Show();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            EliminarCliente eliminar = new EliminarCliente();
+            eliminar.Show();
+        }
     }
 }

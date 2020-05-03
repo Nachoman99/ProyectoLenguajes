@@ -91,6 +91,7 @@
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "5-Eliminar un cliente";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnAtras
             // 

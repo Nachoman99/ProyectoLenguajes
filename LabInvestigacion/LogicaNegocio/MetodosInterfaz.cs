@@ -17,6 +17,11 @@ namespace LogicaNegocio
 
         //Cliente/////////////////////////////////////
 
+        public dynamic consultaCliente()
+        {
+            return gestor.consultaCliente();
+        }
+
         public void insertarCliente(int cedula, string nombre, string apellido, string correo, string telefono)
         {
             gestor.InsertarCliente(apellido, cedula, correo, nombre, telefono);
@@ -108,6 +113,24 @@ namespace LogicaNegocio
             gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
         }
 
+        public void eliminarCliente(int cedula)
+        {
+            gestor.eliminarCliente(cedula);
+        }
+
+        public Boolean existeClienteFisico(int cedula)
+        {
+            Cliente cliente = gestor.ComprobarExistenciaCliente(cedula);
+            if (cliente.IndicActivoCliente != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Boolean productoExistencteFisico(String codigo)
         {
             Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
@@ -117,7 +140,5 @@ namespace LogicaNegocio
             }
             return false;
         }
-
-
     }
 }
