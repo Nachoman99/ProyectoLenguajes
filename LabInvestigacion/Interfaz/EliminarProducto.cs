@@ -42,15 +42,19 @@ namespace Interfaz
                         this.Visible = false;
                         MantenimientoProductos mantP = new MantenimientoProductos();
                         mantP.Show();
+                    } else
+                    {
+                        MessageBox.Show("Ocurrió un error: El Producto no Existe");
                     }
-                    else
-
-                        lbError.Text = "Debe de Completar Todos los Espacios";
                 }
                 catch (Exception ex)
                 {
                     //MessageBox.Show("Ocurrió un error: " + ex.Message);
                 }
+            }
+            else
+            { 
+                lbError.Text = "Debe de Completar Todos los Espacios";
             }
         }
 
