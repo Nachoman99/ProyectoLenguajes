@@ -1,5 +1,4 @@
-﻿using AccesoDatos;
-using LabInvestigacion.Interfaz;
+﻿using LabInvestigacion.Interfaz;
 using LogicaNegocio;
 using System;
 using System.Collections.Generic;

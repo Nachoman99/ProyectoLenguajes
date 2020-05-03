@@ -21,29 +21,15 @@ namespace AccesoDatos
             SqlConnection connection = new SqlConnection(@"server=" + nameServer + " ; database=" + database + " ; integrated security =" + " " + integratedSecurity);
         }
 
-        public void eliminarCliente(int cedula)
+        public dynamic consultaCliente()
         {
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            var clienteElminiar = from Cliente in dc.Cliente
-                                  where Cliente.Cedula == cedula
-                                  select Cliente;
-            foreach (var Cliente in clienteElminiar)
-            {
-                dc.Cliente.DeleteOnSubmit(Cliente);
-            }
-            try
-            {
-                dc.SubmitChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
-                dc.Connection.Close();
-            }
-            MessageBox.Show("Se eliminó correctamente");
-            dc.Connection.Close();
+            var clientes = from cliente in dc.Cliente
+                           where cliente.IndicActivoCliente == 1
+                           select cliente;
+            return clientes;
         }
 
         public void actualizarCliente(int cedula, string apellido, string correo, string nombre, string numeroTelefono)
@@ -119,32 +105,6 @@ namespace AccesoDatos
             dc.Connection.Close();
         }
 
-        public string consultaCliente(int cedula)
-        {
-            LecturaArchivos lectura = new LecturaArchivos();
-            DataTable MiDataTable = new DataTable();
-            SqlConnection conexion = new SqlConnection(lectura.leerServer());
-
-            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
-            string cliente1;
-            cliente1 = cliente.Cedula.ToString();
-            cliente1 += " " + cliente.Nombre;
-            cliente1 += " " + cliente.Apellido;
-            cliente1 += " " + cliente.Correo;
-            cliente1 += " " + cliente.NumeroTelefono;
-            return cliente1;
-
-            //Aqui se acomoda los datos del cliente--acomodar en la interfaz
-
-            //txtApellido.Text = cliente.Apellido;
-            //txtApellido.Text = cliente.Cedula;
-            //txtApellido.Text = cliente.Correo;
-            //txtApellido.Text = cliente.Nombre;
-            //txtApellido.Text = cliente.NumeroTelefono;
-
-        }
-
         //////////////////////////////////////////////////////////Producto
         ///
 
@@ -205,6 +165,24 @@ namespace AccesoDatos
             }
         }
 
+        public Cliente ComprobarExistenciaCliente(int cedula)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            Cliente cliente = new Cliente();
+            try
+            {
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Ocurrió un error: " + ex.Message);
+            }
+            return cliente;
+        }
+
         //Consulta Producto
 
         public Producto ComprobarExistenciaProducto(int codigo)
@@ -237,6 +215,26 @@ namespace AccesoDatos
                             select producto;
 
             return productos;
+        }
+
+        public void eliminarCliente(int cedula)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+            try
+            {
+                cliente.IndicActivoCliente = 0;
+                dc.SubmitChanges();
+                MessageBox.Show("El cliente se eliminó correctamente");
+                dc.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                dc.Connection.Close();
+            }
         }
 
         public void eliminarProducto(int codigo)

@@ -79,5 +79,10 @@ namespace Interfaz
             MantenimientoProductos mantP = new MantenimientoProductos();
             mantP.Show();
         }
+
+        private void InsertarProducto_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

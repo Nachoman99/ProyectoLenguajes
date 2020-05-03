@@ -25,14 +25,29 @@ namespace LabInvestigacion.Interfaz
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            if (txtCorreo.Text.Contains("@"))
+            if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)) == false)
             {
-                metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
+                MessageBox.Show("El cliente con esta cédula ya existe");
             }
             else
             {
-                MessageBox.Show("Debe de Introducir un Correo Válido");
+                if (txtCorreo.Text.Contains("@"))
+                {
+                    metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
+                    this.Visible = false;
+                    MantenimientoClientes mantenimiento = new MantenimientoClientes();
+                    mantenimiento.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Debe de Introducir un Correo Válido");
+                }
             }
+        }
+
+        private void InsertarCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

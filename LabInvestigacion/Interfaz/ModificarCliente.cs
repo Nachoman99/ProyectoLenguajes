@@ -32,24 +32,28 @@ namespace Interfaz
         {
             MetodosInterfaz interfaz = new MetodosInterfaz();
             int cedula = int.Parse(txtCedula.Text);
-            if (interfaz.verificarCliente(cedula) is true)
+            if (interfaz.existeClienteFisico(cedula) == true)
             {
+                if (interfaz.verificarCliente(cedula) is true)
+                {
 
-                txtCedula.Enabled = false;
-                txtApellido.Enabled = true;
-                txtCorreo.Enabled = true;
-                txtNombre.Enabled = true;
-                txtTelefono.Enabled = true;
-                txtApellido.Text = interfaz.verApellido(cedula);
-                txtCorreo.Text = interfaz.verCorreo(cedula);
-                txtNombre.Text = interfaz.verNombreCliente(cedula);
-                txtTelefono.Text = interfaz.verTelefono(cedula);
-                btnModificar.Enabled = true;
+                    txtCedula.Enabled = false;
+                    txtApellido.Enabled = true;
+                    txtCorreo.Enabled = true;
+                    txtNombre.Enabled = true;
+                    txtTelefono.Enabled = true;
+                    txtApellido.Text = interfaz.verApellido(cedula);
+                    txtCorreo.Text = interfaz.verCorreo(cedula);
+                    txtNombre.Text = interfaz.verNombreCliente(cedula);
+                    txtTelefono.Text = interfaz.verTelefono(cedula);
+                    btnModificar.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("El número de cédula no se puede encontrar, por favor digite un número de cédula válido");
+                }
             }
-            else
-            {
-                MessageBox.Show("El número de cédula no se puede encontrar, por favor digite un número de cédula válido");
-            }
+            
         }
 
         private void ModificarCliente_Load(object sender, EventArgs e)

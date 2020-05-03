@@ -1,5 +1,4 @@
-﻿using AccesoDatos;
-using LabInvestigacion.Interfaz;
+﻿using LabInvestigacion.Interfaz;
 using LogicaNegocio;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ namespace Interfaz
     public partial class EliminarProducto : Form
     {
 
-        Gestor gestor = new Gestor();
         MetodosInterfaz metodos = new MetodosInterfaz();
 
         public EliminarProducto()
@@ -44,15 +42,19 @@ namespace Interfaz
                         this.Visible = false;
                         MantenimientoProductos mantP = new MantenimientoProductos();
                         mantP.Show();
+                    } else
+                    {
+                        MessageBox.Show("Ocurrió un error: El Producto no Existe");
                     }
-                    else
-
-                        lbError.Text = "Debe de Completar Todos los Espacios";
                 }
                 catch (Exception ex)
                 {
                     //MessageBox.Show("Ocurrió un error: " + ex.Message);
                 }
+            }
+            else
+            { 
+                lbError.Text = "Debe de Completar Todos los Espacios";
             }
         }
 
@@ -61,6 +63,11 @@ namespace Interfaz
             this.Visible = false;
             MantenimientoProductos mantP = new MantenimientoProductos();
             mantP.Show();
+        }
+
+        private void EliminarProducto_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
