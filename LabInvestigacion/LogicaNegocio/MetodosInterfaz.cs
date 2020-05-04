@@ -115,7 +115,7 @@ namespace LogicaNegocio
 
         public void actualizarProducto(String codigo, String desc, String precio, String cantidad)
         {
-            gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
+            gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad), false);
         }
 
         public void eliminarCliente(int cedula)
