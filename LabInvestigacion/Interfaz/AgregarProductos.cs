@@ -1,4 +1,5 @@
 ﻿using AccesoDatos;
+using AccesoDatos2;
 using LabInvestigacion.Interfaz;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,11 @@ namespace Interfaz
         {
             try
             {
-                gestor.validarProductoAgotado(int.Parse(txtProductID.Text), int.Parse(txtCantidad.Text));
+                int codigoProducto = int.Parse(txtProductID.Text);
+                gestor.validarProductoAgotado(codigoProducto, int.Parse(txtCantidad.Text));
+                Producto producto = gestor.ComprobarExistenciaProducto(codigoProducto);
+                int nuevaCantInventario = producto.CantidadInventario - int.Parse(txtCantidad.Text); 
+                gestor.actualizarProducto(codigoProducto,producto.Descripciom,producto.Precio, nuevaCantInventario, true);
                 gestor.insertarFacturaPorProducto(int.Parse(txtCantidad.Text), int.Parse(txtProductID.Text), codigoFact);
                 this.Visible = false;
                 Facturacion menu = new Facturacion(codigoFact, false, cedula);

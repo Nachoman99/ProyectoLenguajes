@@ -66,12 +66,22 @@ namespace LabInvestigacion.Interfaz
             {
                 try
                 {
-                    cedula = txtIngreseClientID.Text;
-                    gestor.ComprobarExistenciaCliente(int.Parse(cedula));
-                    gestor.insertarFactura(codigoFactura, int.Parse(cedula));
-                    this.Visible = false;
-                    AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
-                    addProducts.Visible = true;
+                    
+                    if (string.IsNullOrEmpty(txtIngreseClientID.Text))
+                    {
+                        MessageBox.Show("Se debe ingresar la cedula del cliente");
+                        
+                    }
+                    else
+                    {
+                        cedula = txtIngreseClientID.Text;
+                        gestor.ComprobarExistenciaCliente(int.Parse(cedula));
+                        gestor.insertarFactura(codigoFactura, int.Parse(cedula));
+                        this.Visible = false;
+                        AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
+                        addProducts.Visible = true;
+                    }
+                    
                 }
                 catch(Exception ex)
                 {
@@ -90,10 +100,18 @@ namespace LabInvestigacion.Interfaz
 
         private void btnCrearFact_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Se ha creado la factura exitosamente");
-            this.Visible = false;
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.Visible = true;
+            if (string.IsNullOrEmpty(cedula))
+            {
+                MessageBox.Show("No se ha agregado ningún produto a la fatcura");
+            }
+            else
+            {
+                MessageBox.Show("Se ha creado la factura exitosamente");
+                this.Visible = false;
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.Visible = true;
+            }
+          
         }
 
         private void txtIngreseClientID_TextChanged(object sender, EventArgs e)
