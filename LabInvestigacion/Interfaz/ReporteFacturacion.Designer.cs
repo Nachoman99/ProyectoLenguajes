@@ -159,8 +159,10 @@
             this.Controls.Add(this.lbCliente);
             this.Controls.Add(this.txbCheck);
             this.Controls.Add(this.btVolver);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ReporteFacturacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Facturacion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReporteFacturacion_FormClosing);
             this.ResumeLayout(false);

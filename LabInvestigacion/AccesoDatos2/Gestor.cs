@@ -8,13 +8,18 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace AccesoDatos
 {
     public class Gestor
     {
+
+        private string reporteFinal = "";
 
         public void ConectarBaseDatos(string nameServer, string database, string integratedSecurity)
         {
@@ -44,6 +49,7 @@ namespace AccesoDatos
                 cliente.Apellido = apellido;
                 cliente.Correo = correo;
                 cliente.NumeroTelefono = numeroTelefono;
+                cliente.indicActivoCliente = 1;
                 dc.SubmitChanges();
                 MessageBox.Show("Se actualizó correctamente");
                 dc.Connection.Close();
@@ -89,20 +95,65 @@ namespace AccesoDatos
 
         public void InsertarCliente(string apellido, int cedula, string correo, string nombre, string numeroTelefono)
         {
-            LecturaArchivos lectura = new LecturaArchivos();
-            SqlConnection conexion = new SqlConnection(lectura.leerServer());
-            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Cliente cliente = new Cliente();
-            cliente.Apellido = apellido;
-            cliente.Cedula = cedula;
-            cliente.Correo = correo;
-            cliente.Nombre = nombre;
-            cliente.NumeroTelefono = numeroTelefono;
-            cliente.indicActivoCliente = 1;
-            dc.Cliente.InsertOnSubmit(cliente);
-            dc.SubmitChanges();
-            MessageBox.Show("Se insertó exitosamente");
-            dc.Connection.Close();
+                LecturaArchivos lectura = new LecturaArchivos();
+                SqlConnection conexion = new SqlConnection(lectura.leerServer());
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                Cliente cliente = new Cliente();
+                cliente.Apellido = apellido;
+                cliente.Cedula = cedula;
+                cliente.Correo = correo;
+                cliente.Nombre = nombre;
+                cliente.NumeroTelefono = numeroTelefono;
+                cliente.indicActivoCliente = 1;
+                dc.Cliente.InsertOnSubmit(cliente);
+                dc.SubmitChanges();
+                MessageBox.Show("Se insertó exitosamente");
+                dc.Connection.Close();
+        }
+
+        public Boolean comprobarCorreo(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Normalize the domain
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+                // Examines the domain part of the email and normalizes it.
+                string DomainMapper(Match match)
+                {
+                    // Use IdnMapping class to convert Unicode domain names.
+                    var idn = new IdnMapping();
+
+                    // Pull out and process domain name (throws ArgumentException on invalid)
+                    var domainName = idn.GetAscii(match.Groups[2].Value);
+
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(email,
+                    @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                    @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
         }
 
         //////////////////////////////////////////////////////////Producto
@@ -183,6 +234,8 @@ namespace AccesoDatos
             }
             return cliente;
         }
+
+        
 
         //Consulta Producto
 
@@ -280,7 +333,6 @@ namespace AccesoDatos
             dc.Connection.Close();
         }
 
-
         public void insertarFactura(int codigoFactura, int cedula)
         {
             LecturaArchivos lectura = new LecturaArchivos();
@@ -341,6 +393,7 @@ namespace AccesoDatos
         public List<int> codigosFacturas(int clienteID, DateTime fechaInicio, DateTime fechaFin)
         {
             List<int> codigoFactura = new List<int>();
+            reporteFinal = "";
 
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
@@ -356,13 +409,16 @@ namespace AccesoDatos
             foreach (var factura in facturas)
             {
                 codigoFactura.Add(factura.CodigoFactura);
+                reporteFinal += "Factura ID: " + factura.CodigoFactura + "\r\n" +
+                    "Fecha De La Factura: " + factura.FechaFactura.ToString() + "\r\n";
             }
 
             return codigoFactura;
         }
 
-        public decimal reporteFactura(int clienteID, DateTime fechaInicio, DateTime fechaFin)
+        public string reporteFactura(int clienteID, DateTime fechaInicio, DateTime fechaFin)
         {
+
             int dato;
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
@@ -374,6 +430,7 @@ namespace AccesoDatos
             List<Producto> productos = new List<Producto>();
             foreach (var codigo in codigoFacturas)
             {
+
                 FacturaPorProducto fpp = dc.FacturaPorProducto.First(clie => clie.CodigoFactura_Fk.Equals(codigo));
                 dato = fpp.CodigoProducto_Fk;
                 intermedios.Add(fpp);
@@ -390,7 +447,9 @@ namespace AccesoDatos
                 precio = producto.Precio;
                 total += (cantidad * precio);
             }
-            return total;
+            reporteFinal += "Total Facturado: " + total;
+
+            return reporteFinal;
         }
     }
 }

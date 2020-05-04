@@ -23,7 +23,7 @@ namespace Interfaz
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)) == false)
+            if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
             {
                 metodos.eliminarCliente(int.Parse(txtCedula.Text));
                 MantenimientoClientes mantenimiento = new MantenimientoClientes();
@@ -47,5 +47,6 @@ namespace Interfaz
         {
 
         }
+
     }
 }

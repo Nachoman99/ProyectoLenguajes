@@ -40,7 +40,7 @@ namespace LabInvestigacion.Interfaz
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            this.Visible = false;
             InsertarCliente insertar = new InsertarCliente();
             insertar.Visible = true;
         }

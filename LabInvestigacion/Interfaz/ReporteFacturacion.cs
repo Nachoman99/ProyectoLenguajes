@@ -37,21 +37,20 @@ namespace LabInvestigacion.Interfaz
 
         private void btVerificar_Click(object sender, EventArgs e)
         {
-           // try
-           // {
+            try
+           {
                 if (txbCheck.Text != "")
                 {
                     if (metodos.existeClienteFisico(int.Parse(txbCheck.Text)))
                     {
-                        String text = "Monto Total: ";
-                        decimal dato;
+                        String dato;
                         dato = metodos.reporteFactura(txbCheck.Text, mCalentarStart.SelectionStart, mCalentarEnd.SelectionStart);
 
                         //foreach (var factura in facturas)
                         //{
                         //    text += factura + "\r\n" + "\r\n";
                         //}
-                        txbFactura.Text = text + dato;
+                        txbFactura.Text = dato;
                     }
                     else
                     {
@@ -62,11 +61,11 @@ namespace LabInvestigacion.Interfaz
                 {
                     lbError.Text = "Debe de Llenar la Casilla";
                 }
-            //}
-            //catch (Exception ex)
-            //{
-             //   MessageBox.Show("ERROR: " + ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: Usuario no Encontrado");
+            }
             
         }
     }

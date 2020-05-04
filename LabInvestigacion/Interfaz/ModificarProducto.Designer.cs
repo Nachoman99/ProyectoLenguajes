@@ -139,7 +139,9 @@
             this.Controls.Add(this.txbPrice);
             this.Controls.Add(this.txbDesc);
             this.Controls.Add(this.txbCode);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModificarProducto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarProducto";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModificarProducto_FormClosing);
             this.Load += new System.EventHandler(this.ModificarProducto_Load);
