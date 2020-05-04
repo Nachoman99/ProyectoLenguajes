@@ -7,7 +7,7 @@
       <Column Name="Apellido" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="NumeroTelefono" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IndicActivoCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="indicActivoCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Cliente_Factura" Member="Factura" ThisKey="Cedula" OtherKey="Cedula_Fk" Type="Factura" />
     </Type>
   </Table>
@@ -22,6 +22,7 @@
   </Table>
   <Table Name="dbo.FacturaPorProducto" Member="FacturaPorProducto">
     <Type Name="FacturaPorProducto">
+      <Column Name="ConsultaXProducto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CantidadProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CodigoProducto_Fk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CodigoFactura_Fk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -35,7 +36,7 @@
       <Column Name="Descripciom" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Precio" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="CantidadInventario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IndicActivoProducto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="indicActivoProducto" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Producto_FacturaPorProducto" Member="FacturaPorProducto" ThisKey="CodigoProducto" OtherKey="CodigoProducto_Fk" Type="FacturaPorProducto" />
     </Type>
   </Table>

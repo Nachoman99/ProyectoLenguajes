@@ -36,6 +36,9 @@ namespace AccesoDatos2
     partial void InsertFactura(Factura instance);
     partial void UpdateFactura(Factura instance);
     partial void DeleteFactura(Factura instance);
+    partial void InsertFacturaPorProducto(FacturaPorProducto instance);
+    partial void UpdateFacturaPorProducto(FacturaPorProducto instance);
+    partial void DeleteFacturaPorProducto(FacturaPorProducto instance);
     partial void InsertProducto(Producto instance);
     partial void UpdateProducto(Producto instance);
     partial void DeleteProducto(Producto instance);
@@ -120,7 +123,7 @@ namespace AccesoDatos2
 		
 		private string _NumeroTelefono;
 		
-		private System.Nullable<int> _IndicActivoCliente;
+		private System.Nullable<int> _indicActivoCliente;
 		
 		private EntitySet<Factura> _Factura;
 		
@@ -138,8 +141,8 @@ namespace AccesoDatos2
     partial void OnCorreoChanged();
     partial void OnNumeroTelefonoChanging(string value);
     partial void OnNumeroTelefonoChanged();
-    partial void OnIndicActivoClienteChanging(System.Nullable<int> value);
-    partial void OnIndicActivoClienteChanged();
+    partial void OnindicActivoClienteChanging(System.Nullable<int> value);
+    partial void OnindicActivoClienteChanged();
     #endregion
 		
 		public Cliente()
@@ -248,22 +251,22 @@ namespace AccesoDatos2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndicActivoCliente", DbType="Int")]
-		public System.Nullable<int> IndicActivoCliente
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoCliente", DbType="Int")]
+		public System.Nullable<int> indicActivoCliente
 		{
 			get
 			{
-				return this._IndicActivoCliente;
+				return this._indicActivoCliente;
 			}
 			set
 			{
-				if ((this._IndicActivoCliente != value))
+				if ((this._indicActivoCliente != value))
 				{
-					this.OnIndicActivoClienteChanging(value);
+					this.OnindicActivoClienteChanging(value);
 					this.SendPropertyChanging();
-					this._IndicActivoCliente = value;
-					this.SendPropertyChanged("IndicActivoCliente");
-					this.OnIndicActivoClienteChanged();
+					this._indicActivoCliente = value;
+					this.SendPropertyChanged("indicActivoCliente");
+					this.OnindicActivoClienteChanged();
 				}
 			}
 		}
@@ -326,6 +329,8 @@ namespace AccesoDatos2
 		
 		private System.DateTime _FechaFactura;
 		
+		private EntitySet<FacturaPorProducto> _FacturaPorProducto;
+		
 		private EntityRef<Cliente> _Cliente;
 		
     #region Definiciones de métodos de extensibilidad
@@ -342,6 +347,7 @@ namespace AccesoDatos2
 		
 		public Factura()
 		{
+			this._FacturaPorProducto = new EntitySet<FacturaPorProducto>(new Action<FacturaPorProducto>(this.attach_FacturaPorProducto), new Action<FacturaPorProducto>(this.detach_FacturaPorProducto));
 			this._Cliente = default(EntityRef<Cliente>);
 			OnCreated();
 		}
@@ -410,6 +416,19 @@ namespace AccesoDatos2
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Factura_FacturaPorProducto", Storage="_FacturaPorProducto", ThisKey="CodigoFactura", OtherKey="CodigoFactura_Fk")]
+		public EntitySet<FacturaPorProducto> FacturaPorProducto
+		{
+			get
+			{
+				return this._FacturaPorProducto;
+			}
+			set
+			{
+				this._FacturaPorProducto.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cliente_Factura", Storage="_Cliente", ThisKey="Cedula_Fk", OtherKey="Cedula", IsForeignKey=true)]
 		public Cliente Cliente
 		{
@@ -463,11 +482,27 @@ namespace AccesoDatos2
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_FacturaPorProducto(FacturaPorProducto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factura = this;
+		}
+		
+		private void detach_FacturaPorProducto(FacturaPorProducto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factura = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FacturaPorProducto")]
-	public partial class FacturaPorProducto
+	public partial class FacturaPorProducto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ConsultaXProducto;
 		
 		private int _CantidadProducto;
 		
@@ -475,8 +510,49 @@ namespace AccesoDatos2
 		
 		private int _CodigoFactura_Fk;
 		
+		private EntityRef<Factura> _Factura;
+		
+		private EntityRef<Producto> _Producto;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnConsultaXProductoChanging(int value);
+    partial void OnConsultaXProductoChanged();
+    partial void OnCantidadProductoChanging(int value);
+    partial void OnCantidadProductoChanged();
+    partial void OnCodigoProducto_FkChanging(int value);
+    partial void OnCodigoProducto_FkChanged();
+    partial void OnCodigoFactura_FkChanging(int value);
+    partial void OnCodigoFactura_FkChanged();
+    #endregion
+		
 		public FacturaPorProducto()
 		{
+			this._Factura = default(EntityRef<Factura>);
+			this._Producto = default(EntityRef<Producto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsultaXProducto", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ConsultaXProducto
+		{
+			get
+			{
+				return this._ConsultaXProducto;
+			}
+			set
+			{
+				if ((this._ConsultaXProducto != value))
+				{
+					this.OnConsultaXProductoChanging(value);
+					this.SendPropertyChanging();
+					this._ConsultaXProducto = value;
+					this.SendPropertyChanged("ConsultaXProducto");
+					this.OnConsultaXProductoChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadProducto", DbType="Int NOT NULL")]
@@ -490,7 +566,11 @@ namespace AccesoDatos2
 			{
 				if ((this._CantidadProducto != value))
 				{
+					this.OnCantidadProductoChanging(value);
+					this.SendPropertyChanging();
 					this._CantidadProducto = value;
+					this.SendPropertyChanged("CantidadProducto");
+					this.OnCantidadProductoChanged();
 				}
 			}
 		}
@@ -506,7 +586,15 @@ namespace AccesoDatos2
 			{
 				if ((this._CodigoProducto_Fk != value))
 				{
+					if (this._Producto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCodigoProducto_FkChanging(value);
+					this.SendPropertyChanging();
 					this._CodigoProducto_Fk = value;
+					this.SendPropertyChanged("CodigoProducto_Fk");
+					this.OnCodigoProducto_FkChanged();
 				}
 			}
 		}
@@ -522,8 +610,104 @@ namespace AccesoDatos2
 			{
 				if ((this._CodigoFactura_Fk != value))
 				{
+					if (this._Factura.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCodigoFactura_FkChanging(value);
+					this.SendPropertyChanging();
 					this._CodigoFactura_Fk = value;
+					this.SendPropertyChanged("CodigoFactura_Fk");
+					this.OnCodigoFactura_FkChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Factura_FacturaPorProducto", Storage="_Factura", ThisKey="CodigoFactura_Fk", OtherKey="CodigoFactura", IsForeignKey=true)]
+		public Factura Factura
+		{
+			get
+			{
+				return this._Factura.Entity;
+			}
+			set
+			{
+				Factura previousValue = this._Factura.Entity;
+				if (((previousValue != value) 
+							|| (this._Factura.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Factura.Entity = null;
+						previousValue.FacturaPorProducto.Remove(this);
+					}
+					this._Factura.Entity = value;
+					if ((value != null))
+					{
+						value.FacturaPorProducto.Add(this);
+						this._CodigoFactura_Fk = value.CodigoFactura;
+					}
+					else
+					{
+						this._CodigoFactura_Fk = default(int);
+					}
+					this.SendPropertyChanged("Factura");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Producto_FacturaPorProducto", Storage="_Producto", ThisKey="CodigoProducto_Fk", OtherKey="CodigoProducto", IsForeignKey=true)]
+		public Producto Producto
+		{
+			get
+			{
+				return this._Producto.Entity;
+			}
+			set
+			{
+				Producto previousValue = this._Producto.Entity;
+				if (((previousValue != value) 
+							|| (this._Producto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Producto.Entity = null;
+						previousValue.FacturaPorProducto.Remove(this);
+					}
+					this._Producto.Entity = value;
+					if ((value != null))
+					{
+						value.FacturaPorProducto.Add(this);
+						this._CodigoProducto_Fk = value.CodigoProducto;
+					}
+					else
+					{
+						this._CodigoProducto_Fk = default(int);
+					}
+					this.SendPropertyChanged("Producto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -542,7 +726,9 @@ namespace AccesoDatos2
 		
 		private int _CantidadInventario;
 		
-		private System.Nullable<int> _IndicActivoProducto;
+		private System.Nullable<int> _indicActivoProducto;
+		
+		private EntitySet<FacturaPorProducto> _FacturaPorProducto;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -556,12 +742,13 @@ namespace AccesoDatos2
     partial void OnPrecioChanged();
     partial void OnCantidadInventarioChanging(int value);
     partial void OnCantidadInventarioChanged();
-    partial void OnIndicActivoProductoChanging(System.Nullable<int> value);
-    partial void OnIndicActivoProductoChanged();
+    partial void OnindicActivoProductoChanging(System.Nullable<int> value);
+    partial void OnindicActivoProductoChanged();
     #endregion
 		
 		public Producto()
 		{
+			this._FacturaPorProducto = new EntitySet<FacturaPorProducto>(new Action<FacturaPorProducto>(this.attach_FacturaPorProducto), new Action<FacturaPorProducto>(this.detach_FacturaPorProducto));
 			OnCreated();
 		}
 		
@@ -645,23 +832,36 @@ namespace AccesoDatos2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndicActivoProducto", DbType="Int")]
-		public System.Nullable<int> IndicActivoProducto
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoProducto", DbType="Int")]
+		public System.Nullable<int> indicActivoProducto
 		{
 			get
 			{
-				return this._IndicActivoProducto;
+				return this._indicActivoProducto;
 			}
 			set
 			{
-				if ((this._IndicActivoProducto != value))
+				if ((this._indicActivoProducto != value))
 				{
-					this.OnIndicActivoProductoChanging(value);
+					this.OnindicActivoProductoChanging(value);
 					this.SendPropertyChanging();
-					this._IndicActivoProducto = value;
-					this.SendPropertyChanged("IndicActivoProducto");
-					this.OnIndicActivoProductoChanged();
+					this._indicActivoProducto = value;
+					this.SendPropertyChanged("indicActivoProducto");
+					this.OnindicActivoProductoChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Producto_FacturaPorProducto", Storage="_FacturaPorProducto", ThisKey="CodigoProducto", OtherKey="CodigoProducto_Fk")]
+		public EntitySet<FacturaPorProducto> FacturaPorProducto
+		{
+			get
+			{
+				return this._FacturaPorProducto;
+			}
+			set
+			{
+				this._FacturaPorProducto.Assign(value);
 			}
 		}
 		
@@ -683,6 +883,18 @@ namespace AccesoDatos2
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_FacturaPorProducto(FacturaPorProducto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Producto = this;
+		}
+		
+		private void detach_FacturaPorProducto(FacturaPorProducto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Producto = null;
 		}
 	}
 }
