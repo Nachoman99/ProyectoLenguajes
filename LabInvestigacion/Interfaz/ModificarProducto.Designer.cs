@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.txbDesc = new System.Windows.Forms.TextBox();
-            this.txbPrice = new System.Windows.Forms.TextBox();
+            this.txtbPrice = new System.Windows.Forms.TextBox();
             this.txbQuantity = new System.Windows.Forms.TextBox();
             this.btModify = new System.Windows.Forms.Button();
             this.txbCode = new System.Windows.Forms.TextBox();
@@ -48,14 +48,14 @@
             this.txbDesc.TabIndex = 1;
             this.txbDesc.Text = "Descripción";
             // 
-            // txbPrice
+            // txtbPrice
             // 
-            this.txbPrice.Enabled = false;
-            this.txbPrice.Location = new System.Drawing.Point(12, 131);
-            this.txbPrice.Name = "txbPrice";
-            this.txbPrice.Size = new System.Drawing.Size(158, 20);
-            this.txbPrice.TabIndex = 2;
-            this.txbPrice.Text = "Precio";
+            this.txtbPrice.Enabled = false;
+            this.txtbPrice.Location = new System.Drawing.Point(12, 131);
+            this.txtbPrice.Name = "txtbPrice";
+            this.txtbPrice.Size = new System.Drawing.Size(158, 20);
+            this.txtbPrice.TabIndex = 2;
+            this.txtbPrice.Text = "Precio";
             // 
             // txbQuantity
             // 
@@ -136,7 +136,7 @@
             this.Controls.Add(this.btCheck);
             this.Controls.Add(this.btModify);
             this.Controls.Add(this.txbQuantity);
-            this.Controls.Add(this.txbPrice);
+            this.Controls.Add(this.txtbPrice);
             this.Controls.Add(this.txbDesc);
             this.Controls.Add(this.txbCode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -152,7 +152,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox txbDesc;
-        private System.Windows.Forms.TextBox txbPrice;
+        private System.Windows.Forms.TextBox txtbPrice;
         private System.Windows.Forms.TextBox txbQuantity;
         private System.Windows.Forms.Button btModify;
         private System.Windows.Forms.TextBox txbCode;

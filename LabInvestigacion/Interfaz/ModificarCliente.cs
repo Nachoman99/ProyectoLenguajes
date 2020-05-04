@@ -23,6 +23,13 @@ namespace Interfaz
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtCedula.Text) || String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtApellido.Text) 
+                || String.IsNullOrEmpty(txtCorreo.Text) || String.IsNullOrEmpty(txtTelefono.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             if (txtCedula.Text != "" && txtNombre.Text != "" && txtCorreo.Text != "" && txtApellido.Text != "")
             {
                 if (interfaz.comprobarCorreo(txtCorreo.Text))
@@ -47,6 +54,11 @@ namespace Interfaz
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtCedula.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
             try
             {
                 if (txtCedula.Text != "")

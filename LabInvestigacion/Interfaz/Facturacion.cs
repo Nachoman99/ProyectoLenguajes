@@ -61,7 +61,12 @@ namespace LabInvestigacion.Interfaz
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-           
+            if (String.IsNullOrEmpty(txtIngreseClientID.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             if(nuevaFactura)
             {
                 try
@@ -90,6 +95,12 @@ namespace LabInvestigacion.Interfaz
 
         private void btnCrearFact_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtIngreseClientID.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             MessageBox.Show("Se ha creado la factura exitosamente");
             this.Visible = false;
             MenuPrincipal menu = new MenuPrincipal();

@@ -23,6 +23,12 @@ namespace Interfaz
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtCedula.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
             {
                 metodos.eliminarCliente(int.Parse(txtCedula.Text));

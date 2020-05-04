@@ -35,6 +35,12 @@ namespace Interfaz
 
         private void btCheck_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txbCode.Text)) 
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             Producto producto;
             try
             {
@@ -44,12 +50,12 @@ namespace Interfaz
                     if (metodos.productoExistencteFisico(txbCode.Text))
                     {
                         txbDesc.Text = producto.Descripciom.ToString();
-                        txbPrice.Text = "" + producto.Precio.ToString();
+                        txtbPrice.Text = "" + producto.Precio.ToString();
                         txbQuantity.Text = "" + producto.CantidadInventario.ToString();
                         txbCode.Enabled = false;
                         btCheck.Enabled = false;
                         txbDesc.Enabled = true;
-                        txbPrice.Enabled = true;
+                        txtbPrice.Enabled = true;
                         txbQuantity.Enabled = true;
                         btModify.Enabled = true;
                         label1.Text = "";
@@ -72,11 +78,17 @@ namespace Interfaz
 
         private void btModify_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(txbCode.Text) || string.IsNullOrEmpty(txbDesc.Text) || string.IsNullOrEmpty(txtbPrice.Text) || string.IsNullOrEmpty(txbQuantity.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             try
             {
-                if (txbDesc.Text != "" && txbPrice.Text != "" && txbQuantity.Text != "" )
+                if (txbDesc.Text != "" && txtbPrice.Text != "" && txbQuantity.Text != "" )
                 {
-                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txtbPrice.Text, txbQuantity.Text);
                     this.Visible = false;
                     MantenimientoProductos mantP = new MantenimientoProductos();
                     mantP.Show();

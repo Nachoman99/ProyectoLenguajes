@@ -34,6 +34,12 @@ namespace Interfaz
 
         private void btnAgregarProduct_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtProductID.Text) || String.IsNullOrEmpty(txtCantidad.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             try
             {
                 gestor.validarProductoAgotado(int.Parse(txtProductID.Text), int.Parse(txtCantidad.Text));
