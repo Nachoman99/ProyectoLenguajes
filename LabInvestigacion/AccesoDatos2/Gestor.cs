@@ -27,7 +27,7 @@ namespace AccesoDatos
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
             var clientes = from cliente in dc.Cliente
-                           where cliente.IndicActivoCliente == 1
+                           where cliente.indicActivoCliente == 1
                            select cliente;
             return clientes;
         }
@@ -98,7 +98,7 @@ namespace AccesoDatos
             cliente.Correo = correo;
             cliente.Nombre = nombre;
             cliente.NumeroTelefono = numeroTelefono;
-            cliente.IndicActivoCliente = 1;
+            cliente.indicActivoCliente = 1;
             dc.Cliente.InsertOnSubmit(cliente);
             dc.SubmitChanges();
             MessageBox.Show("Se insertó exitosamente");
@@ -121,7 +121,7 @@ namespace AccesoDatos
                 producto.Descripciom = desc;
                 producto.Precio = precio;
                 producto.CantidadInventario += cantidad;
-                producto.IndicActivoProducto = 1;
+                producto.indicActivoProducto = 1;
                 dc.SubmitChanges();
                 MessageBox.Show("Se actualizó correctamente");
                 dc.Connection.Close();
@@ -151,7 +151,7 @@ namespace AccesoDatos
                     producto.Descripciom = desc;
                     producto.Precio = precio;
                     producto.CantidadInventario = cantidad;
-                    producto.IndicActivoProducto = 1;
+                    producto.indicActivoProducto = 1;
                     dc.Producto.InsertOnSubmit(producto);
                     dc.SubmitChanges();
                     MessageBox.Show("Se insertó exitosamente");
@@ -212,7 +212,7 @@ namespace AccesoDatos
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
 
             var productos = from producto in dc.Producto
-                            where producto.IndicActivoProducto == 1
+                            where producto.indicActivoProducto == 1
                             select producto;
 
             return productos;
@@ -226,7 +226,7 @@ namespace AccesoDatos
             Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
             try
             {
-                cliente.IndicActivoCliente = 0;
+                cliente.indicActivoCliente = 0;
                 dc.SubmitChanges();
                 MessageBox.Show("El cliente se eliminó correctamente");
                 dc.Connection.Close();
@@ -249,7 +249,7 @@ namespace AccesoDatos
 
             try
             {
-                producto.IndicActivoProducto = 0;
+                producto.indicActivoProducto = 0;
                 dc.SubmitChanges();
                 MessageBox.Show("Se elimino correctamente");
                 dc.Connection.Close();
