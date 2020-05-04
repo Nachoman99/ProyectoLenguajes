@@ -35,9 +35,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(713, 415);
+            this.btnVolver.Location = new System.Drawing.Point(535, 337);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(56, 19);
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -46,22 +47,26 @@
             // dtgCliente
             // 
             this.dtgCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgCliente.Location = new System.Drawing.Point(12, 12);
+            this.dtgCliente.Location = new System.Drawing.Point(9, 10);
+            this.dtgCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtgCliente.Name = "dtgCliente";
             this.dtgCliente.ReadOnly = true;
             this.dtgCliente.RowHeadersWidth = 51;
             this.dtgCliente.RowTemplate.Height = 24;
-            this.dtgCliente.Size = new System.Drawing.Size(776, 397);
+            this.dtgCliente.Size = new System.Drawing.Size(582, 323);
             this.dtgCliente.TabIndex = 1;
             // 
             // ConsultarCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.dtgCliente);
             this.Controls.Add(this.btnVolver);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ConsultarCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConsultarCliente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConsultarCliente_FormClosing);
             this.Load += new System.EventHandler(this.ConsultarCliente_Load);

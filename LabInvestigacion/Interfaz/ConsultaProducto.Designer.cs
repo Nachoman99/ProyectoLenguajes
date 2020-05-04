@@ -59,7 +59,9 @@
             this.ClientSize = new System.Drawing.Size(654, 368);
             this.Controls.Add(this.btBack);
             this.Controls.Add(this.dtgProduct);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConsultaProducto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Producto";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConsultaProducto_FormClosing);
             this.Load += new System.EventHandler(this.ConsultaProducto_Load);

@@ -14,6 +14,8 @@ namespace Interfaz
 {
     public partial class ModificarCliente : Form
     {
+        MetodosInterfaz interfaz = new MetodosInterfaz();
+
         public ModificarCliente()
         {
             InitializeComponent();
@@ -21,39 +23,68 @@ namespace Interfaz
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            MetodosInterfaz interfaz = new MetodosInterfaz();
-            interfaz.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
-            this.Visible = false;
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.Visible = true;
+            if (txtCedula.Text != "" && txtNombre.Text != "" && txtCorreo.Text != "" && txtApellido.Text != "")
+            {
+                if (interfaz.comprobarCorreo(txtCorreo.Text))
+                {
+                    MetodosInterfaz interfaz = new MetodosInterfaz();
+                    interfaz.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
+                    this.Visible = false;
+                    MenuPrincipal menu = new MenuPrincipal();
+                    menu.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Indique un Correo Válido");
+                }
+            } 
+            else
+            {
+                MessageBox.Show("Debe de Llenar Todas las Casillas");
+            }
+                
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            MetodosInterfaz interfaz = new MetodosInterfaz();
-            int cedula = int.Parse(txtCedula.Text);
-            if (interfaz.existeClienteFisico(cedula) == true)
+            try
             {
-                if (interfaz.verificarCliente(cedula) is true)
+                if (txtCedula.Text != "")
                 {
-
-                    txtCedula.Enabled = false;
-                    txtApellido.Enabled = true;
-                    txtCorreo.Enabled = true;
-                    txtNombre.Enabled = true;
-                    txtTelefono.Enabled = true;
-                    txtApellido.Text = interfaz.verApellido(cedula);
-                    txtCorreo.Text = interfaz.verCorreo(cedula);
-                    txtNombre.Text = interfaz.verNombreCliente(cedula);
-                    txtTelefono.Text = interfaz.verTelefono(cedula);
-                    btnModificar.Enabled = true;
+                    int cedula = int.Parse(txtCedula.Text);
+                    if (interfaz.existeClienteFisico(cedula))
+                    {
+                        if (interfaz.verificarCliente(cedula) is true)
+                        {
+                            txtCedula.Enabled = false;
+                            txtApellido.Enabled = true;
+                            txtCorreo.Enabled = true;
+                            txtNombre.Enabled = true;
+                            txtTelefono.Enabled = true;
+                            txtApellido.Text = interfaz.verApellido(cedula);
+                            txtCorreo.Text = interfaz.verCorreo(cedula);
+                            txtNombre.Text = interfaz.verNombreCliente(cedula);
+                            txtTelefono.Text = interfaz.verTelefono(cedula);
+                            btnModificar.Enabled = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("El número de cédula no se puede encontrar, por favor digite un número de cédula válido");
+                        }
+                    }else
+                    {
+                        MessageBox.Show("El número de cédula no se puede encontrar, por favor digite un número de cédula válido");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("El número de cédula no se puede encontrar, por favor digite un número de cédula válido");
+                    MessageBox.Show("Debe de Llenar Todas las Casillas");
                 }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: Valor inválido");
+            } 
         }
 
         private void ModificarCliente_Load(object sender, EventArgs e)
@@ -69,8 +100,15 @@ namespace Interfaz
         private void ModificarCliente_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Visible = false;
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.Visible = true;
+            MantenimientoClientes mantC = new MantenimientoClientes();
+            mantC.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            MantenimientoClientes mantC = new MantenimientoClientes();
+            mantC.Show();
         }
     }
 }

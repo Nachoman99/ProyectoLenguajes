@@ -25,29 +25,61 @@ namespace LabInvestigacion.Interfaz
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)) == false)
+            try
             {
-                MessageBox.Show("El cliente con esta cédula ya existe");
-            }
-            else
-            {
-                if (txtCorreo.Text.Contains("@"))
+                if (txtCedula.Text != "" && txtNombre.Text != "" && txtApellido.Text != "" && txtCorreo.Text != "" && txtTelefono.Text != "")
                 {
-                    metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
-                    this.Visible = false;
-                    MantenimientoClientes mantenimiento = new MantenimientoClientes();
-                    mantenimiento.Show();
+                    if (metodos.comprobarCorreo(txtCorreo.Text))
+                    {
+                        if (!metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
+                        {
+                            metodos.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
+                            this.Visible = false;
+                            MantenimientoClientes mantenimiento = new MantenimientoClientes();
+                            mantenimiento.Show();
+                        }
+                        else
+                        {
+                            metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
+                            this.Visible = false;
+                            MantenimientoClientes mantenimiento = new MantenimientoClientes();
+                            mantenimiento.Show();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe de Introducir un Correo Válido");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Debe de Introducir un Correo Válido");
+                    MessageBox.Show("Debe de Llenar todas las Casillas");
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Este Cliente ya Existe");
+            }
+           
         }
 
         private void InsertarCliente_Load(object sender, EventArgs e)
         {
+            
+        }
 
+        private void InsertarCliente_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Visible = false;
+            MantenimientoClientes mantC = new MantenimientoClientes();
+            mantC.Show();
+        }
+
+        private void btBack_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            MantenimientoClientes mantC = new MantenimientoClientes();
+            mantC.Show();
         }
     }
 }

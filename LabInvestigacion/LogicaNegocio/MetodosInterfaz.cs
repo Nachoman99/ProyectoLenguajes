@@ -76,6 +76,11 @@ namespace LogicaNegocio
             return cliente.Nombre;
         }
 
+        public Boolean comprobarCorreo(string correo)
+        {
+            return gestor.comprobarCorreo(correo);
+        }
+
         //Producto/////////////////////////////////////////////////////////////
 
         public void eliminarProducto(int codigo)
