@@ -61,36 +61,38 @@ namespace LabInvestigacion.Interfaz
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtIngreseClientID.Text))
+
+            try
             {
+                if (String.IsNullOrEmpty(txtIngreseClientID.Text))
+                {
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
-            }
+                }
 
-            if(nuevaFactura)
-            {
-                try
+                if(nuevaFactura)
                 {
+                
                     cedula = txtIngreseClientID.Text;
                     gestor.ComprobarExistenciaCliente(int.Parse(cedula));
                     gestor.insertarFactura(codigoFactura, int.Parse(cedula));
                     this.Visible = false;
                     AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
                     addProducts.Visible = true;
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
                 
-            }
-            else
-            {
+                
+                }
+                else
+                {
                 this.Visible = false;
                 AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
                 addProducts.Visible = true;
+                 }
             }
-      
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCrearFact_Click(object sender, EventArgs e)

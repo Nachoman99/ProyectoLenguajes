@@ -55,7 +55,7 @@ namespace Interfaz
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error con Producto");
             }
            
         }

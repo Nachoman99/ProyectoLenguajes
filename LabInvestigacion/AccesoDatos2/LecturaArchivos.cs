@@ -13,7 +13,7 @@ namespace AccesoDatos
 
         public string leerServer()
         {
-            string fichero = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rutaCoca.txt"));
+            string fichero = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rutaJuanca.txt"));
             string server = "";
             StreamReader reader = new StreamReader(fichero);
             string[] line;
@@ -23,41 +23,6 @@ namespace AccesoDatos
                 server = reader.ReadToEnd();
             }
             return server;
-        }
-
-        public string leerDatabase()
-        {
-            string fichero = @"C: \rutaBaseDatos.txt";
-            string dataBase = "";
-            StreamReader reader = new StreamReader(fichero);
-            string[] line;
-
-            if (File.Exists(fichero))
-            {
-                reader.ReadLine();
-                dataBase = reader.ReadLine();
-                line = dataBase.Split('=');
-                dataBase = line[1];
-            }
-            return dataBase;
-        }
-
-        public string leerSecurity()
-        {
-            string fichero = @"C: \rutaBaseDatos.txt";
-            string security = "";
-            StreamReader reader = new StreamReader(fichero);
-            string[] line;
-
-            if (File.Exists(fichero))
-            {
-                reader.ReadLine();
-                reader.ReadLine();
-                security = reader.ReadLine();
-                line = security.Split('=');
-                security = line[1];
-            }
-            return security;
         }
     }
 }

@@ -41,7 +41,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(426, 244);
+            this.btnVolver.Location = new System.Drawing.Point(427, 334);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 15;
@@ -51,7 +51,7 @@
             // 
             // btnAgregarProduct
             // 
-            this.btnAgregarProduct.Location = new System.Drawing.Point(406, 209);
+            this.btnAgregarProduct.Location = new System.Drawing.Point(407, 299);
             this.btnAgregarProduct.Name = "btnAgregarProduct";
             this.btnAgregarProduct.Size = new System.Drawing.Size(116, 23);
             this.btnAgregarProduct.TabIndex = 14;
@@ -61,7 +61,7 @@
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(192, 244);
+            this.txtCantidad.Location = new System.Drawing.Point(193, 334);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(137, 20);
             this.txtCantidad.TabIndex = 13;
@@ -69,7 +69,7 @@
             // lblCantidad
             // 
             this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(37, 244);
+            this.lblCantidad.Location = new System.Drawing.Point(38, 334);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(95, 13);
             this.lblCantidad.TabIndex = 12;
@@ -77,7 +77,7 @@
             // 
             // txtProductID
             // 
-            this.txtProductID.Location = new System.Drawing.Point(192, 212);
+            this.txtProductID.Location = new System.Drawing.Point(193, 302);
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.Size = new System.Drawing.Size(137, 20);
             this.txtProductID.TabIndex = 11;
@@ -85,7 +85,7 @@
             // lblProductID
             // 
             this.lblProductID.AutoSize = true;
-            this.lblProductID.Location = new System.Drawing.Point(37, 219);
+            this.lblProductID.Location = new System.Drawing.Point(38, 309);
             this.lblProductID.Name = "lblProductID";
             this.lblProductID.Size = new System.Drawing.Size(149, 13);
             this.lblProductID.TabIndex = 10;
@@ -97,7 +97,7 @@
             this.dgvListProducts.Location = new System.Drawing.Point(40, 62);
             this.dgvListProducts.Name = "dgvListProducts";
             this.dgvListProducts.ReadOnly = true;
-            this.dgvListProducts.Size = new System.Drawing.Size(523, 125);
+            this.dgvListProducts.Size = new System.Drawing.Size(523, 218);
             this.dgvListProducts.TabIndex = 9;
             // 
             // label3
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 288);
+            this.ClientSize = new System.Drawing.Size(596, 397);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregarProduct);
@@ -123,8 +123,10 @@
             this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.dgvListProducts);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AgregarProductos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AgregarProductos";
             this.Load += new System.EventHandler(this.AgregarProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListProducts)).EndInit();

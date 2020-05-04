@@ -252,7 +252,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("Ocurrió un error: Cliente no Existe");
             }
             return cliente;
         }
