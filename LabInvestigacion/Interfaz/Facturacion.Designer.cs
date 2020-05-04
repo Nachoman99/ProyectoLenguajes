@@ -39,7 +39,7 @@
             // 
             this.btnVolver.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnVolver.Location = new System.Drawing.Point(535, 337);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(2);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(56, 19);
             this.btnVolver.TabIndex = 0;
@@ -84,6 +84,7 @@
             this.txtIngreseClientID.Name = "txtIngreseClientID";
             this.txtIngreseClientID.Size = new System.Drawing.Size(100, 20);
             this.txtIngreseClientID.TabIndex = 6;
+            this.txtIngreseClientID.TextChanged += new System.EventHandler(this.txtIngreseClientID_TextChanged);
             // 
             // Facturacion
             // 
@@ -96,7 +97,7 @@
             this.Controls.Add(this.lblIngreseClientID);
             this.Controls.Add(this.txtIngreseClientID);
             this.Controls.Add(this.btnVolver);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Facturacion";
             this.Text = "Facturación";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Facturacion_FormClosing);

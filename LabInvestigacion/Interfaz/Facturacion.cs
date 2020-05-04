@@ -16,8 +16,23 @@ namespace LabInvestigacion.Interfaz
     {
         Gestor gestor = new Gestor();
 
-        public Facturacion()
+        int codigoFactura;
+        Boolean nuevaFactura;
+        string cedula;
+
+        public Facturacion(int codigoFactura, Boolean nuevaFactura)
         {
+            this.nuevaFactura = nuevaFactura;
+            this.codigoFactura = codigoFactura; 
+            InitializeComponent();
+        }
+
+        public Facturacion(int codigoFactura, Boolean nuevaFactura, string cedula)
+        {
+      
+            this.nuevaFactura = nuevaFactura;
+            this.codigoFactura = codigoFactura;
+            this.cedula = cedula;
             InitializeComponent();
         }
 
@@ -37,16 +52,40 @@ namespace LabInvestigacion.Interfaz
 
         private void Facturacion_Load(object sender, EventArgs e)
         {
-
+            txtIngreseClientID.Text = cedula;
+            if (!nuevaFactura)
+            {
+                txtIngreseClientID.Enabled = false;
+            }
         }
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-            int codigoFactura = gestor.GetLastIdFactura2().CodigoFactura + 1;  
-            gestor.insertarFactura(codigoFactura, int.Parse(txtIngreseClientID.Text));
-            this.Visible = false;
-            AgregarProductos addProducts = new AgregarProductos(codigoFactura);
-            addProducts.Visible = true;
+           
+            if(nuevaFactura)
+            {
+                try
+                {
+                    cedula = txtIngreseClientID.Text;
+                    gestor.ComprobarExistenciaCliente(int.Parse(cedula));
+                    gestor.insertarFactura(codigoFactura, int.Parse(cedula));
+                    this.Visible = false;
+                    AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
+                    addProducts.Visible = true;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
+            }
+            else
+            {
+                this.Visible = false;
+                AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
+                addProducts.Visible = true;
+            }
+      
         }
 
         private void btnCrearFact_Click(object sender, EventArgs e)
@@ -57,7 +96,9 @@ namespace LabInvestigacion.Interfaz
             menu.Visible = true;
         }
 
+        private void txtIngreseClientID_TextChanged(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

@@ -99,6 +99,7 @@
             this.dgvListProducts.ReadOnly = true;
             this.dgvListProducts.Size = new System.Drawing.Size(476, 125);
             this.dgvListProducts.TabIndex = 9;
+            this.dgvListProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListProducts_CellContentClick);
             // 
             // lblListProducts
             // 
@@ -122,7 +123,7 @@
             this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.dgvListProducts);
             this.Controls.Add(this.lblListProducts);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AgregarProductos";
             this.Text = "AgregarProductos";
             this.Load += new System.EventHandler(this.AgregarProductos_Load);

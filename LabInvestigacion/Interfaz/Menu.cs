@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccesoDatos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace LabInvestigacion.Interfaz
 {
     public partial class MenuPrincipal : Form
     {
+        Gestor gestor = new Gestor();
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -34,7 +36,8 @@ namespace LabInvestigacion.Interfaz
         private void btnFacturación_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Facturacion facturacion = new Facturacion();
+            int codigoFactura = gestor.GetLastIdFactura2().CodigoFactura + 1;
+            Facturacion facturacion = new Facturacion(codigoFactura, true);
             facturacion.Visible = true;
         }
 

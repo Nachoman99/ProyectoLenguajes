@@ -404,5 +404,42 @@ namespace AccesoDatos
 
             return fact.First();
         }
+
+
+
+        public void validarProductoAgotado(int codigoProducto, int cantidadSolicitada)
+        {
+                        
+                Producto product = GetProducto(codigoProducto);
+
+                if (product == null)
+                {
+                    throw new Exception("El producto solicitado no existe");
+                }
+                else if (product.CantidadInventario == 0)
+                { 
+                    throw new Exception("El producto " + product.Descripciom + " se encuentra agotado");
+                }
+                else if(product.CantidadInventario < cantidadSolicitada)
+                {
+                    throw new Exception("La cantidad solicitada excede la cantidad en inventario del producto" + product.Descripciom);
+                }
+                
+            
+        }
+
+        public Producto GetProducto(int codigo)
+        {
+
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            Producto producto = new Producto();    
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
+      
+            return producto;
+        }
+
     }
 }

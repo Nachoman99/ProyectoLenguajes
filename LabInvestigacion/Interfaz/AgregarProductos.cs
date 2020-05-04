@@ -18,11 +18,12 @@ namespace Interfaz
 
         Gestor gestor = new Gestor();
         int codigoFact;
+        string cedula;
 
-        public AgregarProductos(int codigoFact)
+        public AgregarProductos(int codigoFact, string cedula)
         {
-
             this.codigoFact = codigoFact;
+            this.cedula = cedula;
             InitializeComponent();
         }
 
@@ -33,17 +34,31 @@ namespace Interfaz
 
         private void btnAgregarProduct_Click(object sender, EventArgs e)
         {
-            gestor.insertarFacturaPorProducto(int.Parse(txtCantidad.Text), int.Parse(txtProductID.Text), codigoFact);
-            this.Visible = false;
-            Facturacion menu = new Facturacion();
-            menu.Visible = true;
+            try
+            {
+                gestor.validarProductoAgotado(int.Parse(txtProductID.Text), int.Parse(txtCantidad.Text));
+                gestor.insertarFacturaPorProducto(int.Parse(txtCantidad.Text), int.Parse(txtProductID.Text), codigoFact);
+                this.Visible = false;
+                Facturacion menu = new Facturacion(codigoFact, false, cedula);
+                menu.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Facturacion menu = new Facturacion();
+            Facturacion menu = new Facturacion(codigoFact, false, cedula);
             menu.Visible = true;
+        }
+
+        private void dgvListProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
