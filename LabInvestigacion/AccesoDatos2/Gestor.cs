@@ -170,6 +170,7 @@ namespace AccesoDatos
             LecturaArchivos lectura = new LecturaArchivos();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             Cliente cliente = new Cliente();
+
             try
             {
                 DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
@@ -178,7 +179,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
             }
             return cliente;
         }
@@ -307,5 +308,75 @@ namespace AccesoDatos
             }
         }
 
+        //public dynamic reporteFactura(int clienteID, DateTime fechaInicio, DateTime fechaFin)
+        //{
+        //    LecturaArchivos lectura = new LecturaArchivos();
+        //    SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+        //    DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+        //    var facturas = from factura in dc.Factura
+        //                   where factura.Cedula_Fk == clienteID
+        //                   where factura.FechaFactura >= fechaInicio
+        //                   where factura.FechaFactura <= fechaFin
+        //                   select factura;
+        //    return facturas;
+        //}
+
+
+        public List<int> codigosFacturas(int clienteID, DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<int> codigoFactura = new List<int>();
+
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            var facturas = from factura in dc.Factura
+                           where factura.Cedula_Fk == clienteID
+                           where factura.FechaFactura >= fechaInicio
+                           where factura.FechaFactura <= fechaFin
+                           select factura;
+
+            foreach (var factura in facturas)
+            {
+                codigoFactura.Add(factura.CodigoFactura);
+            }
+
+            return codigoFactura;
+        }
+
+        public decimal reporteFactura(int clienteID, DateTime fechaInicio, DateTime fechaFin)
+        {
+            int dato;
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            List<int> codigoFacturas = codigosFacturas(clienteID, fechaInicio, fechaFin);
+            List<FacturaPorProducto> intermedios = new List<FacturaPorProducto>();
+            List<Producto> productos = new List<Producto>();
+            foreach (var codigo in codigoFacturas)
+            {
+                FacturaPorProducto fpp = dc.FacturaPorProducto.First(clie => clie.CodigoFactura_Fk.Equals(codigo));
+                dato = fpp.CodigoProducto_Fk;
+                intermedios.Add(fpp);
+            }
+
+            int cantidad = 0;
+            decimal precio = 0;
+            decimal total = 0;
+            foreach (var intermedio in intermedios)
+            {
+                Producto producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(intermedio.CodigoProducto_Fk));
+                productos.Add(producto);
+                cantidad = intermedio.CantidadProducto;
+                precio = producto.Precio;
+                total += (cantidad * precio);
+            }
+            return total;
+        }
     }
 }

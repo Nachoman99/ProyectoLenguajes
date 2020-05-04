@@ -33,7 +33,7 @@ namespace LabInvestigacion.Interfaz
 
         private void btnFacturación_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
+            this.Visible = false;
             Facturacion facturacion = new Facturacion();
             facturacion.Visible = true;
         }
@@ -48,6 +48,16 @@ namespace LabInvestigacion.Interfaz
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void MenuPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.ExitThread();
+        }
+
+        private void MenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.ExitThread();
         }
     }
 }

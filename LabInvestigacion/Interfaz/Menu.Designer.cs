@@ -39,18 +39,20 @@
             // lblMenu
             // 
             this.lblMenu.AutoSize = true;
-            this.lblMenu.Location = new System.Drawing.Point(332, 9);
+            this.lblMenu.Location = new System.Drawing.Point(249, 7);
+            this.lblMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(101, 17);
+            this.lblMenu.Size = new System.Drawing.Size(77, 13);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Menú Principal";
             // 
             // lblOpciones
             // 
             this.lblOpciones.AutoSize = true;
-            this.lblOpciones.Location = new System.Drawing.Point(12, 46);
+            this.lblOpciones.Location = new System.Drawing.Point(9, 37);
+            this.lblOpciones.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOpciones.Name = "lblOpciones";
-            this.lblOpciones.Size = new System.Drawing.Size(298, 17);
+            this.lblOpciones.Size = new System.Drawing.Size(222, 13);
             this.lblOpciones.TabIndex = 1;
             this.lblOpciones.Text = "Por favor elija una de las siguientes opciones:";
             // 
@@ -58,9 +60,10 @@
             // 
             this.btnMantenimientoClientes.AutoSize = true;
             this.btnMantenimientoClientes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMantenimientoClientes.Location = new System.Drawing.Point(12, 101);
+            this.btnMantenimientoClientes.Location = new System.Drawing.Point(9, 82);
+            this.btnMantenimientoClientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMantenimientoClientes.Name = "btnMantenimientoClientes";
-            this.btnMantenimientoClientes.Size = new System.Drawing.Size(195, 27);
+            this.btnMantenimientoClientes.Size = new System.Drawing.Size(149, 23);
             this.btnMantenimientoClientes.TabIndex = 2;
             this.btnMantenimientoClientes.Text = "1-Mantenimiento de clientes";
             this.btnMantenimientoClientes.UseVisualStyleBackColor = true;
@@ -70,9 +73,10 @@
             // 
             this.btnMantenimientoProductos.AutoSize = true;
             this.btnMantenimientoProductos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnMantenimientoProductos.Location = new System.Drawing.Point(12, 154);
+            this.btnMantenimientoProductos.Location = new System.Drawing.Point(9, 125);
+            this.btnMantenimientoProductos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMantenimientoProductos.Name = "btnMantenimientoProductos";
-            this.btnMantenimientoProductos.Size = new System.Drawing.Size(210, 27);
+            this.btnMantenimientoProductos.Size = new System.Drawing.Size(160, 23);
             this.btnMantenimientoProductos.TabIndex = 3;
             this.btnMantenimientoProductos.Text = "2-Mantenimiento de productos";
             this.btnMantenimientoProductos.UseVisualStyleBackColor = true;
@@ -82,9 +86,10 @@
             // 
             this.btnFacturación.AutoSize = true;
             this.btnFacturación.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnFacturación.Location = new System.Drawing.Point(15, 201);
+            this.btnFacturación.Location = new System.Drawing.Point(11, 163);
+            this.btnFacturación.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFacturación.Name = "btnFacturación";
-            this.btnFacturación.Size = new System.Drawing.Size(105, 27);
+            this.btnFacturación.Size = new System.Drawing.Size(82, 23);
             this.btnFacturación.TabIndex = 4;
             this.btnFacturación.Text = "3-Facturación";
             this.btnFacturación.UseVisualStyleBackColor = true;
@@ -94,10 +99,11 @@
             // 
             this.btnReporteFacturacion.AutoSize = true;
             this.btnReporteFacturacion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReporteFacturacion.Location = new System.Drawing.Point(15, 260);
+            this.btnReporteFacturacion.Location = new System.Drawing.Point(11, 211);
+            this.btnReporteFacturacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReporteFacturacion.Name = "btnReporteFacturacion";
             this.btnReporteFacturacion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnReporteFacturacion.Size = new System.Drawing.Size(176, 27);
+            this.btnReporteFacturacion.Size = new System.Drawing.Size(135, 23);
             this.btnReporteFacturacion.TabIndex = 5;
             this.btnReporteFacturacion.Text = "4-Reporte de facturación";
             this.btnReporteFacturacion.UseVisualStyleBackColor = true;
@@ -105,18 +111,21 @@
             // 
             // MenuPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btnReporteFacturacion);
             this.Controls.Add(this.btnFacturación);
             this.Controls.Add(this.btnMantenimientoProductos);
             this.Controls.Add(this.btnMantenimientoClientes);
             this.Controls.Add(this.lblOpciones);
             this.Controls.Add(this.lblMenu);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MenuPrincipal";
             this.Text = "Menú Principal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuPrincipal_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MenuPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.MenuPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

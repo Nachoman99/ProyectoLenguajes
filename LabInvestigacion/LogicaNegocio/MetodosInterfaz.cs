@@ -140,5 +140,13 @@ namespace LogicaNegocio
             }
             return false;
         }
+
+        ///Factura/////////////////////////////////
+        ///
+
+        public dynamic reporteFactura(String codigo, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return gestor.reporteFactura(int.Parse(codigo), fechaInicio, fechaFin);
+        }
     }
 }
