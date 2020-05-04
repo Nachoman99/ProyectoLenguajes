@@ -42,7 +42,7 @@ namespace LabInvestigacion.Interfaz
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-            int codigoFactura = gestor.GetLastIdFactura().CodigoFactura + 1;  
+            int codigoFactura = gestor.GetLastIdFactura2().CodigoFactura + 1;  
             gestor.insertarFactura(codigoFactura, int.Parse(txtIngreseClientID.Text));
             this.Visible = false;
             AgregarProductos addProducts = new AgregarProductos(codigoFactura);

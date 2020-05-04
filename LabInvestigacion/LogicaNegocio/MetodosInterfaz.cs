@@ -121,7 +121,7 @@ namespace LogicaNegocio
         public Boolean existeClienteFisico(int cedula)
         {
             Cliente cliente = gestor.ComprobarExistenciaCliente(cedula);
-            if (cliente.IndicActivoCliente != 0)
+            if (cliente.indicActivoCliente != 0)
             {
                 return true;
             }
@@ -134,7 +134,7 @@ namespace LogicaNegocio
         public Boolean productoExistencteFisico(String codigo)
         {
             Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
-            if (producto.IndicActivoProducto != 0)
+            if (producto.indicActivoProducto != 0)
             {
                 return true;
             }

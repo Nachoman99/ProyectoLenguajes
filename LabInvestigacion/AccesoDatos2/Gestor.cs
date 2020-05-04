@@ -268,14 +268,12 @@ namespace AccesoDatos
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            string insertStatement = "Insert into FacturaPorProducto values(" + cantidadProducto + "," + codigoProducto + "," + codigoFactura + ")";
-            dc.ExecuteQuery<FacturaPorProducto>(insertStatement);
-            //FacturaPorProducto factura_x_Producto = new FacturaPorProducto();
-            //factura_x_Producto.CantidadProducto = cantidadProducto;
-            //factura_x_Producto.CodigoProducto_Fk = codigoProducto;
-            //factura_x_Producto.CodigoFactura_Fk = codigoFactura;
-            //dc.FacturaPorProducto.InsertOnSubmit(factura_x_Producto);
-            //dc.SubmitChanges();
+            FacturaPorProducto factura_x_Producto = new FacturaPorProducto();
+            factura_x_Producto.CantidadProducto = cantidadProducto;
+            factura_x_Producto.CodigoProducto_Fk = codigoProducto;
+            factura_x_Producto.CodigoFactura_Fk = codigoFactura;
+            dc.FacturaPorProducto.InsertOnSubmit(factura_x_Producto);
+            dc.SubmitChanges();
             MessageBox.Show("Se ha agregado el producto exitosamente");
             dc.Connection.Close();
         }
@@ -391,6 +389,20 @@ namespace AccesoDatos
                 total += (cantidad * precio);
             }
             return total;
+        }
+
+        public dynamic GetLastIdFactura2()
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+
+            var fact = from factura in dc.Factura
+                       orderby factura.CodigoFactura descending
+                       select factura;
+
+            return fact.First();
         }
     }
 }
