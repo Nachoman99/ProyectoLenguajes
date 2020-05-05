@@ -102,11 +102,17 @@ namespace LabInvestigacion.Interfaz
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
             }
-
-            MessageBox.Show("Se ha creado la factura exitosamente");
-            this.Visible = false;
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.Visible = true;
+            else if(txtIngreseClientID.Enabled)
+            {
+                MessageBox.Show("Se deben agregar productos a la factura");
+            }
+            else
+            {
+                MessageBox.Show("Se ha creado la factura exitosamente");
+                this.Visible = false;
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.Visible = true;
+            }
         }
 
         private void txtIngreseClientID_TextChanged(object sender, EventArgs e)
