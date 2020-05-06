@@ -1,3 +1,0 @@
-server=DESKTOP-8RGOI3B\SQLSERVERDEV2019
-database=LanguajesLab1
-integrated security= true

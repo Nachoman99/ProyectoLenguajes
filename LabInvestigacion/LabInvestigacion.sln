@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabInvestigacion", "LabInvestigacion\LabInvestigacion.csproj", "{ACE119A2-8B93-4AF7-87B4-C6AE73314DFA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz", "Interfaz\Interfaz.csproj", "{1FA0CC60-8E3F-4B6D-A04A-32E784662F5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos2\AccesoDatos.csproj", "{9E48797B-644F-488D-93E4-7D079AA1A3C1}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ACE119A2-8B93-4AF7-87B4-C6AE73314DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACE119A2-8B93-4AF7-87B4-C6AE73314DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACE119A2-8B93-4AF7-87B4-C6AE73314DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACE119A2-8B93-4AF7-87B4-C6AE73314DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FA0CC60-8E3F-4B6D-A04A-32E784662F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FA0CC60-8E3F-4B6D-A04A-32E784662F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FA0CC60-8E3F-4B6D-A04A-32E784662F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
