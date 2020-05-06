@@ -159,7 +159,7 @@ namespace AccesoDatos
         //////////////////////////////////////////////////////////Producto
         ///
 
-        public void actualizarProducto(int codigo, string desc, decimal precio, int cantidad)
+        public void actualizarProducto(int codigo, string desc, decimal precio, int cantidad, Boolean isAddProduct)
         {
             LecturaArchivos lectura = new LecturaArchivos();
             DataTable MiDataTable = new DataTable();
@@ -169,13 +169,35 @@ namespace AccesoDatos
 
             try
             {
-                producto.Descripciom = desc;
-                producto.Precio = precio;
-                producto.CantidadInventario += cantidad;
-                producto.indicActivoProducto = 1;
-                dc.SubmitChanges();
-                MessageBox.Show("Se actualizó correctamente");
-                dc.Connection.Close();
+                if (cantidad == 0)
+                {
+                    producto.indicActivoProducto = 0;
+                }
+                else
+                {
+                    producto.indicActivoProducto = 1;
+
+                }
+
+                if (isAddProduct)
+                {
+                    producto.Descripciom = desc;
+                    producto.Precio = precio;
+                    producto.CantidadInventario = cantidad;
+                    dc.SubmitChanges();
+                    dc.Connection.Close();
+                }
+                else
+                {
+                    producto.Descripciom = desc;
+                    producto.Precio = precio;
+                    producto.CantidadInventario = cantidad;
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se actualizó correctamente");
+                    dc.Connection.Close();
+                }
+               
+            
             }
             catch (Exception ex)
             {
@@ -230,7 +252,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("Ocurrió un error: Cliente no Existe");
             }
             return cliente;
         }
@@ -470,12 +492,7 @@ namespace AccesoDatos
         {
                         
                 Producto product = GetProducto(codigoProducto);
-
-                if (product == null)
-                {
-                    throw new Exception("El producto solicitado no existe");
-                }
-                else if (product.CantidadInventario == 0)
+                if (product.CantidadInventario == 0)
                 { 
                     throw new Exception("El producto " + product.Descripciom + " se encuentra agotado");
                 }

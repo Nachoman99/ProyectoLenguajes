@@ -55,7 +55,7 @@
             // 
             this.btBack.AutoSize = true;
             this.btBack.Location = new System.Drawing.Point(11, 222);
-            this.btBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btBack.Margin = new System.Windows.Forms.Padding(2);
             this.btBack.Name = "btBack";
             this.btBack.Size = new System.Drawing.Size(79, 29);
             this.btBack.TabIndex = 44;
@@ -67,7 +67,7 @@
             // 
             this.btInsert.AutoSize = true;
             this.btInsert.Location = new System.Drawing.Point(331, 230);
-            this.btInsert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btInsert.Margin = new System.Windows.Forms.Padding(2);
             this.btInsert.Name = "btInsert";
             this.btInsert.Size = new System.Drawing.Size(75, 29);
             this.btInsert.TabIndex = 43;
@@ -78,7 +78,7 @@
             // txbPrice
             // 
             this.txbPrice.Location = new System.Drawing.Point(175, 154);
-            this.txbPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txbPrice.Name = "txbPrice";
             this.txbPrice.Size = new System.Drawing.Size(229, 20);
             this.txbPrice.TabIndex = 42;
@@ -86,15 +86,16 @@
             // txbDesc
             // 
             this.txbDesc.Location = new System.Drawing.Point(175, 105);
-            this.txbDesc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbDesc.Margin = new System.Windows.Forms.Padding(2);
             this.txbDesc.Name = "txbDesc";
             this.txbDesc.Size = new System.Drawing.Size(229, 20);
             this.txbDesc.TabIndex = 41;
+            this.txbDesc.TextChanged += new System.EventHandler(this.txbDesc_TextChanged);
             // 
             // txbQuantity
             // 
             this.txbQuantity.Location = new System.Drawing.Point(175, 195);
-            this.txbQuantity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.txbQuantity.Name = "txbQuantity";
             this.txbQuantity.Size = new System.Drawing.Size(231, 20);
             this.txbQuantity.TabIndex = 40;
@@ -102,7 +103,7 @@
             // txbCode
             // 
             this.txbCode.Location = new System.Drawing.Point(175, 61);
-            this.txbCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbCode.Margin = new System.Windows.Forms.Padding(2);
             this.txbCode.Name = "txbCode";
             this.txbCode.Size = new System.Drawing.Size(229, 20);
             this.txbCode.TabIndex = 39;

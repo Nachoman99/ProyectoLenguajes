@@ -41,6 +41,13 @@ namespace Interfaz
 
         private void btInsert_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txbCode.Text) || String.IsNullOrEmpty(txbDesc.Text) || String.IsNullOrEmpty(txbPrice.Text) 
+                || String.IsNullOrEmpty(txbQuantity.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
             {
                 if(metodos.productoExistencteFisico(txbCode.Text))
@@ -81,6 +88,11 @@ namespace Interfaz
         }
 
         private void InsertarProducto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbDesc_TextChanged(object sender, EventArgs e)
         {
 
         }

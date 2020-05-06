@@ -61,39 +61,58 @@ namespace LabInvestigacion.Interfaz
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-           
-            if(nuevaFactura)
+
+            try
             {
-                try
+                if (String.IsNullOrEmpty(txtIngreseClientID.Text))
                 {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+                }
+
+                if(nuevaFactura)
+                {
+                
                     cedula = txtIngreseClientID.Text;
                     gestor.ComprobarExistenciaCliente(int.Parse(cedula));
                     gestor.insertarFactura(codigoFactura, int.Parse(cedula));
                     this.Visible = false;
                     AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
                     addProducts.Visible = true;
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
                 
-            }
-            else
-            {
+                
+                }
+                else
+                {
                 this.Visible = false;
                 AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
                 addProducts.Visible = true;
+                 }
             }
-      
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCrearFact_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Se ha creado la factura exitosamente");
-            this.Visible = false;
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.Visible = true;
+            if (String.IsNullOrEmpty(txtIngreseClientID.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+            else if(txtIngreseClientID.Enabled)
+            {
+                MessageBox.Show("Se deben agregar productos a la factura");
+            }
+            else
+            {
+                MessageBox.Show("Se ha creado la factura exitosamente");
+                this.Visible = false;
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.Visible = true;
+            }
         }
 
         private void txtIngreseClientID_TextChanged(object sender, EventArgs e)

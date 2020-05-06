@@ -31,6 +31,12 @@ namespace Interfaz
 
         private void btInsert_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txbCode.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
+
             if (txbCode.Text != "")
             {
                 try

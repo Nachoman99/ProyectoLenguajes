@@ -25,6 +25,12 @@ namespace LabInvestigacion.Interfaz
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtCedula.Text) || String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtApellido.Text) 
+                || String.IsNullOrEmpty(txtCorreo.Text) || String.IsNullOrEmpty(txtTelefono.Text))
+            {
+                MessageBox.Show("Verificar que no exista un espacio en blanco");
+                return;
+            }
             try
             {
                 if (txtCedula.Text != "" && txtNombre.Text != "" && txtApellido.Text != "" && txtCorreo.Text != "" && txtTelefono.Text != "")
