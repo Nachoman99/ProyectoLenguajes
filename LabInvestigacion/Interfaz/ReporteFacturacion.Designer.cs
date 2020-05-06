@@ -45,10 +45,10 @@
             // 
             this.btVolver.AutoSize = true;
             this.btVolver.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btVolver.Location = new System.Drawing.Point(746, 321);
-            this.btVolver.Margin = new System.Windows.Forms.Padding(2);
+            this.btVolver.Location = new System.Drawing.Point(995, 395);
+            this.btVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btVolver.Name = "btVolver";
-            this.btVolver.Size = new System.Drawing.Size(47, 23);
+            this.btVolver.Size = new System.Drawing.Size(58, 27);
             this.btVolver.TabIndex = 0;
             this.btVolver.Text = "Volver";
             this.btVolver.UseVisualStyleBackColor = true;
@@ -56,46 +56,51 @@
             // 
             // txbCheck
             // 
-            this.txbCheck.Location = new System.Drawing.Point(12, 30);
+            this.txbCheck.Location = new System.Drawing.Point(16, 37);
+            this.txbCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbCheck.Name = "txbCheck";
-            this.txbCheck.Size = new System.Drawing.Size(133, 20);
+            this.txbCheck.Size = new System.Drawing.Size(176, 22);
             this.txbCheck.TabIndex = 2;
             // 
             // lbCliente
             // 
             this.lbCliente.AutoSize = true;
-            this.lbCliente.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCliente.Location = new System.Drawing.Point(12, 8);
+            this.lbCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCliente.Location = new System.Drawing.Point(16, 10);
+            this.lbCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCliente.Name = "lbCliente";
-            this.lbCliente.Size = new System.Drawing.Size(113, 19);
+            this.lbCliente.Size = new System.Drawing.Size(148, 24);
             this.lbCliente.TabIndex = 10;
             this.lbCliente.Text = "Código Cliente";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 63);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 19);
+            this.label1.Size = new System.Drawing.Size(90, 24);
             this.label1.TabIndex = 11;
             this.label1.Text = "Facturas";
             // 
             // txbFactura
             // 
-            this.txbFactura.Location = new System.Drawing.Point(16, 85);
+            this.txbFactura.Location = new System.Drawing.Point(21, 105);
+            this.txbFactura.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbFactura.Multiline = true;
             this.txbFactura.Name = "txbFactura";
             this.txbFactura.ReadOnly = true;
             this.txbFactura.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txbFactura.Size = new System.Drawing.Size(243, 259);
+            this.txbFactura.Size = new System.Drawing.Size(323, 318);
             this.txbFactura.TabIndex = 12;
             // 
             // btVerificar
             // 
-            this.btVerificar.Location = new System.Drawing.Point(155, 30);
+            this.btVerificar.Location = new System.Drawing.Point(207, 37);
+            this.btVerificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btVerificar.Name = "btVerificar";
-            this.btVerificar.Size = new System.Drawing.Size(75, 20);
+            this.btVerificar.Size = new System.Drawing.Size(100, 25);
             this.btVerificar.TabIndex = 13;
             this.btVerificar.Text = "Verificar";
             this.btVerificar.UseVisualStyleBackColor = true;
@@ -103,33 +108,37 @@
             // 
             // mCalentarStart
             // 
-            this.mCalentarStart.Location = new System.Drawing.Point(279, 85);
+            this.mCalentarStart.Location = new System.Drawing.Point(372, 105);
+            this.mCalentarStart.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
             this.mCalentarStart.Name = "mCalentarStart";
             this.mCalentarStart.TabIndex = 14;
             // 
             // mCalentarEnd
             // 
-            this.mCalentarEnd.Location = new System.Drawing.Point(545, 85);
+            this.mCalentarEnd.Location = new System.Drawing.Point(727, 105);
+            this.mCalentarEnd.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
             this.mCalentarEnd.Name = "mCalentarEnd";
             this.mCalentarEnd.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(718, 63);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(957, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 19);
+            this.label2.Size = new System.Drawing.Size(105, 24);
             this.label2.TabIndex = 16;
             this.label2.Text = "Fecha Fin";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Book Antiqua", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(275, 63);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(367, 78);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 19);
+            this.label3.Size = new System.Drawing.Size(125, 24);
             this.label3.TabIndex = 17;
             this.label3.Text = "Fecha Inicio";
             // 
@@ -137,17 +146,18 @@
             // 
             this.lbError.AutoSize = true;
             this.lbError.ForeColor = System.Drawing.Color.Red;
-            this.lbError.Location = new System.Drawing.Point(236, 34);
+            this.lbError.Location = new System.Drawing.Point(315, 42);
+            this.lbError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbError.Name = "lbError";
-            this.lbError.Size = new System.Drawing.Size(0, 13);
+            this.lbError.Size = new System.Drawing.Size(0, 17);
             this.lbError.TabIndex = 18;
             // 
             // ReporteFacturacion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(806, 357);
+            this.ClientSize = new System.Drawing.Size(1075, 439);
             this.Controls.Add(this.lbError);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -160,11 +170,12 @@
             this.Controls.Add(this.txbCheck);
             this.Controls.Add(this.btVolver);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ReporteFacturacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Facturacion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReporteFacturacion_FormClosing);
+            this.Load += new System.EventHandler(this.ReporteFacturacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

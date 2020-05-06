@@ -42,10 +42,10 @@ namespace Interfaz
                 if (txbCode.Text != "")
                 {
 
-                        if (metodos.productoExistencteFisicoSinError(txbCode.Text))
+                        if (metodos.ProductoExistencteFisicoSinError(txbCode.Text))
                         {
                             //metodos.comprobarExistenciaProducto(txbCode.Text);
-                            metodos.eliminarProducto(txbCode.Text);
+                            metodos.EliminarProducto(txbCode.Text);
                             this.Visible = false;
                             MantenimientoProductos mantP = new MantenimientoProductos();
                             mantP.Show();

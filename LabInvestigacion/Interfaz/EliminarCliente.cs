@@ -35,9 +35,9 @@ namespace Interfaz
                // int valor;
                 //if (int.TryParse(txtCedula.Text, out valor))
                 //{
-                    if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
+                    if (metodos.ExisteClienteFisico(int.Parse(txtCedula.Text)))
                     {
-                        metodos.eliminarCliente(int.Parse(txtCedula.Text));
+                        metodos.EliminarCliente(int.Parse(txtCedula.Text));
                         MantenimientoClientes mantenimiento = new MantenimientoClientes();
                         this.Visible = false;
                         mantenimiento.Show();

@@ -41,9 +41,9 @@ namespace Interfaz
                 Producto producto = new Producto();
                 if (txbCode.Text != "")
                 {
-                    if (metodos.productoExistencteFisicoSinError(txbCode.Text))
+                    if (metodos.ProductoExistencteFisicoSinError(txbCode.Text))
                     {
-                        producto = metodos.obtenerProducto(txbCode.Text);
+                        producto = metodos.ObtenerProducto(txbCode.Text);
 
                         if(producto.Descripcion != null)
                         {
@@ -86,7 +86,7 @@ namespace Interfaz
             {
                 if (txbDesc.Text != "" && txtbPrice.Text != "" && txbQuantity.Text != "")
                 {
-                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txtbPrice.Text, txbQuantity.Text);
+                    metodos.ActualizarProducto(txbCode.Text, txbDesc.Text, txtbPrice.Text, txbQuantity.Text);
                     this.Visible = false;
                     MantenimientoProductos mantP = new MantenimientoProductos();
                     mantP.Show();
