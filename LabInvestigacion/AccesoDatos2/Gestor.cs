@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.IO;
 
 namespace AccesoDatos
 {
@@ -39,24 +40,60 @@ namespace AccesoDatos
 
         public void actualizarCliente(int cedula, string apellido, string correo, string nombre, string numeroTelefono)
         {
-            if (verificarCliente(cedula) is true)
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            try
             {
-                LecturaArchivos lectura = new LecturaArchivos();
-                SqlConnection conexion = new SqlConnection(lectura.leerServer());
-                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-                Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
-                cliente.Nombre = nombre;
-                cliente.Apellido = apellido;
-                cliente.Correo = correo;
-                cliente.NumeroTelefono = numeroTelefono;
-                cliente.indicActivoCliente = 1;
-                dc.SubmitChanges();
-                MessageBox.Show("Se actualizó correctamente");
-                dc.Connection.Close();
+                if (cedula > 0 && esNumero(cedula) != false)
+                {
+
+                    Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cedula));
+                    if (nombre != null && nombre != "")
+                    {
+                        cliente.Nombre = nombre;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: El nombre no es válido.");
+                    }
+                    if (apellido != null && apellido != "")
+                    {
+                        cliente.Apellido = apellido;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: El apellido no es válido.");
+                    }
+                    if (comprobarCorreo(correo) == true)
+                    {
+                        cliente.Correo = correo;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: Correo no válido.");
+                    }
+                    if (esNumero(numeroTelefono) != false)
+                    {
+                        cliente.NumeroTelefono = numeroTelefono;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: Número de teléfono no válido.");
+                    }
+                    cliente.indicActivoCliente = 1;
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se actualizó correctamente");
+                    dc.Connection.Close();
+                }
+                else
+                {
+                    throw new Exception("Error: La cedula no es válida");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("La cedula especificada no se encuentra");
+                MessageBox.Show("Fallo: " + ex.Message);
             }
         }
 
@@ -95,20 +132,82 @@ namespace AccesoDatos
 
         public void InsertarCliente(string apellido, int cedula, string correo, string nombre, string numeroTelefono)
         {
+            try
+            {
                 LecturaArchivos lectura = new LecturaArchivos();
                 SqlConnection conexion = new SqlConnection(lectura.leerServer());
                 DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
                 Cliente cliente = new Cliente();
-                cliente.Apellido = apellido;
-                cliente.Cedula = cedula;
-                cliente.Correo = correo;
-                cliente.Nombre = nombre;
-                cliente.NumeroTelefono = numeroTelefono;
-                cliente.indicActivoCliente = 1;
-                dc.Cliente.InsertOnSubmit(cliente);
-                dc.SubmitChanges();
-                MessageBox.Show("Se insertó exitosamente");
-                dc.Connection.Close();
+                if (apellido != null && apellido != "")
+                {
+                    cliente.Apellido = apellido;
+                }
+                else
+                {
+                    throw new Exception("El apellido no puede estar vacío");
+                }
+                if (cedula > 0 && esNumero(cedula) != false)
+                {
+                    cliente.Cedula = cedula;
+                }
+                else
+                {
+                    throw new Exception("Digite una cédula válida");
+                }
+                if (comprobarCorreo(correo) == true)
+                {
+                    cliente.Correo = correo;
+                }
+                else
+                {
+                    throw new Exception("Digite un correo válido");
+                }
+                if (nombre != null && nombre != "")
+                {
+                    cliente.Nombre = nombre;
+                }
+                else
+                {
+                    throw new Exception("Digite un nombre válido");
+                }
+                if (numeroTelefono != null && numeroTelefono != "" && esNumero(numeroTelefono) != false)
+                {
+                    cliente.NumeroTelefono = numeroTelefono;
+                }
+                else
+                {
+                    throw new Exception("Digite un número de teléfono válido");
+                }
+
+
+                Cliente cliente1 = ComprobarExistenciaCliente(cedula);
+                if (cliente1.indicActivoCliente == null)
+                {
+                    cliente.indicActivoCliente = 1;
+                    dc.Cliente.InsertOnSubmit(cliente);
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se insertó exitosamente");
+                    dc.Connection.Close();
+                }else if(cliente1.indicActivoCliente == 1)
+                {
+                    throw new Exception("Este cliente ya existe, no se puede insertar.");
+                }
+                else if(cliente1.indicActivoCliente == 0)
+                {
+                    cliente.indicActivoCliente = 1;
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se insertó exitosamente");
+                    dc.Connection.Close();
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Ocurrió un error, verifique la ruta de acceso a la base de datos.");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Este Cliente ya Existe");
+            }
         }
 
         public Boolean comprobarCorreo(string email)
@@ -154,6 +253,14 @@ namespace AccesoDatos
             {
                 return false;
             }
+        }
+
+        public Boolean esNumero(object objeto)
+        {
+            Boolean esNumero;
+            int retNumero;
+            esNumero = int.TryParse(Convert.ToString(objeto), out retNumero);
+            return esNumero;
         }
 
         //////////////////////////////////////////////////////////Producto
@@ -213,7 +320,7 @@ namespace AccesoDatos
             DataTable MiDataTable = new DataTable();
             SqlConnection conexion = new SqlConnection(lectura.leerServer());
             DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
-            Producto tempProduct = ComprobarExistenciaProducto(codigo);
+            Producto tempProduct = ComprobarExistenciaProductoNoError(codigo);
 
             try
             {
@@ -233,7 +340,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: Este Producto ya Existe");
+                MessageBox.Show("Este Producto ya Existe");
                 dc.Connection.Close();
             }
         }
@@ -252,12 +359,12 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: Cliente no Existe");
+                //MessageBox.Show("Ocurrió un error: Cliente no Existe");
             }
             return cliente;
         }
 
-        
+
 
         //Consulta Producto
 
@@ -274,7 +381,25 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un Error: " + ex.Message);
+                MessageBox.Show("Producto no existe");
+            }
+            return producto;
+        }
+
+        public Producto ComprobarExistenciaProductoNoError(int codigo)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            DataTable MiDataTable = new DataTable();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            Producto producto = new Producto();
+            try
+            {
+                DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+                producto = dc.Producto.First(clie => clie.CodigoProducto.Equals(codigo));
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Producto no existe");
             }
             return producto;
         }
@@ -324,14 +449,14 @@ namespace AccesoDatos
 
             try
             {
-                producto.indicActivoProducto = 0;
-                dc.SubmitChanges();
-                MessageBox.Show("Se elimino correctamente");
-                dc.Connection.Close();
+                    producto.indicActivoProducto = 0;
+                    dc.SubmitChanges();
+                    MessageBox.Show("Se elimino correctamente");
+                    dc.Connection.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error: " + ex.Message);
+                MessageBox.Show("El Producto no Existe");
                 dc.Connection.Close();
             }
         }

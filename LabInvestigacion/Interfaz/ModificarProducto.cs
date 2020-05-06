@@ -35,34 +35,33 @@ namespace Interfaz
 
         private void btCheck_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txbCode.Text)) 
-            {
-                MessageBox.Show("Verificar que no exista un espacio en blanco");
-                return;
-            }
 
-            Producto producto;
             try
             {
+                Producto producto = new Producto();
                 if (txbCode.Text != "")
                 {
-                    producto = metodos.obtenerProducto(txbCode.Text);
-                    if (metodos.productoExistencteFisico(txbCode.Text))
+                    if (metodos.productoExistencteFisicoSinError(txbCode.Text))
                     {
-                        txbDesc.Text = producto.Descripciom.ToString();
-                        txtbPrice.Text = "" + producto.Precio.ToString();
-                        txbQuantity.Text = "" + producto.CantidadInventario.ToString();
-                        txbCode.Enabled = false;
-                        btCheck.Enabled = false;
-                        txbDesc.Enabled = true;
-                        txtbPrice.Enabled = true;
-                        txbQuantity.Enabled = true;
-                        btModify.Enabled = true;
-                        label1.Text = "";
+                        producto = metodos.obtenerProducto(txbCode.Text);
+
+                        if(producto.Descripciom != null)
+                        {
+                            txbDesc.Text = producto.Descripciom.ToString();
+                            txtbPrice.Text = "" + producto.Precio.ToString();
+                            txbQuantity.Text = "" + producto.CantidadInventario.ToString();
+                            txbCode.Enabled = false;
+                            btCheck.Enabled = false;
+                            txbDesc.Enabled = true;
+                            txtbPrice.Enabled = true;
+                            txbQuantity.Enabled = true;
+                            btModify.Enabled = true;
+                            label1.Text = "";
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("No Existe el Código");
+                        MessageBox.Show("No Existe el Producto");
                     }
                 }
                 else
@@ -70,23 +69,22 @@ namespace Interfaz
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Valores Invalidos");
             }
         }
 
         private void btModify_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txbCode.Text) || string.IsNullOrEmpty(txbDesc.Text) || string.IsNullOrEmpty(txtbPrice.Text) || string.IsNullOrEmpty(txbQuantity.Text))
+            if (string.IsNullOrEmpty(txbCode.Text) || string.IsNullOrEmpty(txbDesc.Text) || string.IsNullOrEmpty(txtbPrice.Text) || string.IsNullOrEmpty(txbQuantity.Text))
             {
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
             }
-
             try
             {
-                if (txbDesc.Text != "" && txtbPrice.Text != "" && txbQuantity.Text != "" )
+                if (txbDesc.Text != "" && txtbPrice.Text != "" && txbQuantity.Text != "")
                 {
                     metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txtbPrice.Text, txbQuantity.Text);
                     this.Visible = false;
@@ -98,9 +96,10 @@ namespace Interfaz
                     label1.Text = "Debe De Llenar Todas las Casillas";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+
+                MessageBox.Show("Valores Invalidos");
             }
         }
 

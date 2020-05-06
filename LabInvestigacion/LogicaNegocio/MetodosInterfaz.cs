@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LogicaNegocio
 {
@@ -95,7 +96,8 @@ namespace LogicaNegocio
 
         public void comprobarExistenciaProducto(String codigo)
         {
-            gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+
+               gestor.ComprobarExistenciaProducto(int.Parse(codigo));
         }
 
         public void eliminarProducto(String codigo)
@@ -105,17 +107,26 @@ namespace LogicaNegocio
 
         public void insertarProducto(String codigo, String desc, String precio, String cantidad)
         {
-            gestor.InsertarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
+                gestor.InsertarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad));
         }
 
         public Producto obtenerProducto(String codigo)
         {
-            return gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+
+                return gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+
         }
 
         public void actualizarProducto(String codigo, String desc, String precio, String cantidad)
         {
-            gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad), false);
+            try
+            {
+                gestor.actualizarProducto(int.Parse(codigo), desc, decimal.Parse(precio), int.Parse(cantidad), false);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valor Invalido");
+            }
         }
 
         public void eliminarCliente(int cedula)
@@ -136,9 +147,33 @@ namespace LogicaNegocio
             }
         }
 
+        public Boolean esNumero(object num)
+        {
+            return gestor.esNumero(num);
+        }
+
         public Boolean productoExistencteFisico(String codigo)
         {
-            Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+            try
+            {
+                Producto producto = gestor.ComprobarExistenciaProducto(int.Parse(codigo));
+                if (producto.indicActivoProducto != 0)
+                {
+                    return true;
+                }
+                
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Valor invalido");
+            }
+            return false;
+        }
+
+        public Boolean productoExistencteFisicoSinError(String codigo)
+        {
+
+            Producto producto = gestor.ComprobarExistenciaProductoNoError(int.Parse(codigo));
             if (producto.indicActivoProducto != 0)
             {
                 return true;

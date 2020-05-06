@@ -23,23 +23,37 @@ namespace Interfaz
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtCedula.Text))
+            try
             {
-                MessageBox.Show("Verificar que no exista un espacio en blanco");
-                return;
-            }
+                if (String.IsNullOrEmpty(txtCedula.Text))
+                {
+                    MessageBox.Show("Verificar que no exista un espacio en blanco");
+                    return;
+                }
 
-            if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
-            {
-                metodos.eliminarCliente(int.Parse(txtCedula.Text));
-                MantenimientoClientes mantenimiento = new MantenimientoClientes();
-                this.Visible = false;
-                mantenimiento.Show();
+
+               // int valor;
+                //if (int.TryParse(txtCedula.Text, out valor))
+                //{
+                    if (metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
+                    {
+                        metodos.eliminarCliente(int.Parse(txtCedula.Text));
+                        MantenimientoClientes mantenimiento = new MantenimientoClientes();
+                        this.Visible = false;
+                        mantenimiento.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El cliente con esa cédula no existe. Intente con otra");
+                    }
+                //}
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("El cliente con esa cédula no existe. Intente con otra");
+                MessageBox.Show("Error " + ex.Message);
             }
+            
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

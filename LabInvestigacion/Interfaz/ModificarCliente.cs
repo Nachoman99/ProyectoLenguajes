@@ -30,26 +30,25 @@ namespace Interfaz
                 return;
             }
 
-            if (txtCedula.Text != "" && txtNombre.Text != "" && txtCorreo.Text != "" && txtApellido.Text != "")
+            MetodosInterfaz metodos = new MetodosInterfaz();
+            try
             {
-                if (interfaz.comprobarCorreo(txtCorreo.Text))
+                if (metodos.esNumero(txtCedula.Text) != false)
                 {
-                    MetodosInterfaz interfaz = new MetodosInterfaz();
-                    interfaz.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
+                    metodos.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
                     this.Visible = false;
                     MenuPrincipal menu = new MenuPrincipal();
                     menu.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Indique un Correo Válido");
+                    throw new Exception("Error: Cédula no válida");
                 }
-            } 
-            else
-            {
-                MessageBox.Show("Debe de Llenar Todas las Casillas");
             }
-                
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

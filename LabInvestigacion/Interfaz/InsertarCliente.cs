@@ -25,51 +25,34 @@ namespace LabInvestigacion.Interfaz
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtCedula.Text) || String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtApellido.Text) 
+            if (String.IsNullOrEmpty(txtCedula.Text) || String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtApellido.Text)
                 || String.IsNullOrEmpty(txtCorreo.Text) || String.IsNullOrEmpty(txtTelefono.Text))
             {
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
             }
+
+            MetodosInterfaz metodos = new MetodosInterfaz();
             try
             {
-                if (txtCedula.Text != "" && txtNombre.Text != "" && txtApellido.Text != "" && txtCorreo.Text != "" && txtTelefono.Text != "")
+                if (metodos.esNumero(txtCedula.Text) != false)
                 {
-                    if (metodos.comprobarCorreo(txtCorreo.Text))
-                    {
-                        if (!metodos.existeClienteFisico(int.Parse(txtCedula.Text)))
-                        {
-                            metodos.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
-                            this.Visible = false;
-                            MantenimientoClientes mantenimiento = new MantenimientoClientes();
-                            mantenimiento.Show();
-                        }
-                        else
-                        {
-                            metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
-                            this.Visible = false;
-                            MantenimientoClientes mantenimiento = new MantenimientoClientes();
-                            mantenimiento.Show();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Debe de Introducir un Correo Válido");
-                    }
+                    metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
+                    this.Visible = false;
+                    MantenimientoClientes mantC = new MantenimientoClientes();
+                    mantC.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Debe de Llenar todas las Casillas");
+                    throw new Exception("Digite la cédula correctamente");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Este Cliente ya Existe");
-            }
-           
-        }
 
-        private void InsertarCliente_Load(object sender, EventArgs e)
+            }
+        }
+                private void InsertarCliente_Load(object sender, EventArgs e)
         {
             
         }

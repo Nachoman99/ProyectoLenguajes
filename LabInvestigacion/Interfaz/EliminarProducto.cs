@@ -31,37 +31,43 @@ namespace Interfaz
 
         private void btInsert_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txbCode.Text))
+            try
             {
-                MessageBox.Show("Verificar que no exista un espacio en blanco");
-                return;
-            }
+                if (String.IsNullOrEmpty(txbCode.Text))
+                {
+                    MessageBox.Show("Verificar que no exista un espacio en blanco");
+                    return;
+                }
 
-            if (txbCode.Text != "")
+                if (txbCode.Text != "")
+                {
+
+                        if (metodos.productoExistencteFisicoSinError(txbCode.Text))
+                        {
+                            //metodos.comprobarExistenciaProducto(txbCode.Text);
+                            metodos.eliminarProducto(txbCode.Text);
+                            this.Visible = false;
+                            MantenimientoProductos mantP = new MantenimientoProductos();
+                            mantP.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("El Producto no Existe");
+                        }
+                }
+                else
+                {
+                    lbError.Text = "Debe de Completar Todos los Espacios";
+                }
+            }
+            catch (FormatException)
             {
-                try
-                {
-                    if (metodos.productoExistencteFisico(txbCode.Text))
-                    {
-                        //metodos.comprobarExistenciaProducto(txbCode.Text);
-                        metodos.eliminarProducto(txbCode.Text);
-                        this.Visible = false;
-                        MantenimientoProductos mantP = new MantenimientoProductos();
-                        mantP.Show();
-                    } else
-                    {
-                        MessageBox.Show("Ocurrió un error: El Producto no Existe");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show("Ocurrió un error: " + ex.Message);
-                }
+                MessageBox.Show("Valores Invalidos");
             }
-            else
-            { 
-                lbError.Text = "Debe de Completar Todos los Espacios";
-            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("El Producto no Existe");
+            }   
         }
 
         private void btBack_Click(object sender, EventArgs e)

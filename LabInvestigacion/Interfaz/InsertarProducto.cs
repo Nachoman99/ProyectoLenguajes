@@ -41,36 +41,42 @@ namespace Interfaz
 
         private void btInsert_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txbCode.Text) || String.IsNullOrEmpty(txbDesc.Text) || String.IsNullOrEmpty(txbPrice.Text) 
+            if (String.IsNullOrEmpty(txbCode.Text) || String.IsNullOrEmpty(txbDesc.Text) || String.IsNullOrEmpty(txbPrice.Text)
                 || String.IsNullOrEmpty(txbQuantity.Text))
             {
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
             }
-
-            if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
+            try
             {
-                if(metodos.productoExistencteFisico(txbCode.Text))
+                if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
                 {
-                    try
+                    if (metodos.productoExistencteFisicoSinError(txbCode.Text))
                     {
                         metodos.insertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                         this.Visible = false;
                         MantenimientoProductos mantP = new MantenimientoProductos();
                         mantP.Show();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Ocurrió un error:" + ex.Message);
+                        metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                        this.Visible = false;
+                        MantenimientoProductos mantP = new MantenimientoProductos();
+                        mantP.Show();
                     }
-                }else {
-                    metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                }
+                else
+                {
+                    label1.Text = "Debe de Llenar Todos los Espacios";
                 }
             }
-            else
+            catch (Exception)
             {
-                label1.Text = "Debe de Llenar Todos los Espacios";
+
+                MessageBox.Show("Valores Invalidos");
             }
+           
         }
 
         private void InsertarProducto_FormClosing_1(object sender, FormClosingEventArgs e)
