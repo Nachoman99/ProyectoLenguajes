@@ -24,7 +24,7 @@ namespace Interfaz
 
         private void ConsultaProducto_Load(object sender, EventArgs e)
         {
-            dtgProduct.DataSource = metodo.consultaProducto();
+            dtgProduct.DataSource = metodo.ConsultaProducto();
         }
 
         private void ConsultaProducto_FormClosing(object sender, FormClosingEventArgs e)

@@ -35,9 +35,9 @@ namespace LabInvestigacion.Interfaz
             MetodosInterfaz metodos = new MetodosInterfaz();
             try
             {
-                if (metodos.esNumero(txtCedula.Text))
+                if (metodos.EsNumero(txtCedula.Text))
                 {
-                    metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
+                    metodos.InsertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
                     this.Visible = false;
                     MantenimientoClientes mantC = new MantenimientoClientes();
                     mantC.Show();

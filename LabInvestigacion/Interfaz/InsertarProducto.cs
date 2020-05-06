@@ -51,16 +51,16 @@ namespace Interfaz
             {
                 if (txbCode.Text != "" & txbDesc.Text != "" & txbPrice.Text != "" & txbQuantity.Text != "")
                 {
-                    if (metodos.productoExistencteFisicoSinError(txbCode.Text))
+                    if (metodos.ProductoExistencteFisicoSinError(txbCode.Text))
                     {
-                        metodos.insertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                        metodos.InsertarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                         this.Visible = false;
                         MantenimientoProductos mantP = new MantenimientoProductos();
                         mantP.Show();
                     }
                     else
                     {
-                        metodos.actualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
+                        metodos.ActualizarProducto(txbCode.Text, txbDesc.Text, txbPrice.Text, txbQuantity.Text);
                         this.Visible = false;
                         MantenimientoProductos mantP = new MantenimientoProductos();
                         mantP.Show();

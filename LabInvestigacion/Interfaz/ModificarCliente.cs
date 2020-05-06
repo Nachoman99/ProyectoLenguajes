@@ -33,9 +33,9 @@ namespace Interfaz
             MetodosInterfaz metodos = new MetodosInterfaz();
             try
             {
-                if (metodos.esNumero(txtCedula.Text) != false)
+                if (metodos.EsNumero(txtCedula.Text) != false)
                 {
-                    metodos.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
+                    metodos.ActualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
                     this.Visible = false;
                     MantenimientoClientes mantC = new MantenimientoClientes();
                     mantC.Show();
@@ -63,19 +63,19 @@ namespace Interfaz
                 if (txtCedula.Text != "")
                 {
                     int cedula = int.Parse(txtCedula.Text);
-                    if (interfaz.existeClienteFisico(cedula))
+                    if (interfaz.ExisteClienteFisico(cedula))
                     {
-                        if (interfaz.verificarCliente(cedula) is true)
+                        if (interfaz.VerificarCliente(cedula) is true)
                         {
                             txtCedula.Enabled = false;
                             txtApellido.Enabled = true;
                             txtCorreo.Enabled = true;
                             txtNombre.Enabled = true;
                             txtTelefono.Enabled = true;
-                            txtApellido.Text = interfaz.verApellido(cedula);
-                            txtCorreo.Text = interfaz.verCorreo(cedula);
-                            txtNombre.Text = interfaz.verNombreCliente(cedula);
-                            txtTelefono.Text = interfaz.verTelefono(cedula);
+                            txtApellido.Text = interfaz.VerApellido(cedula);
+                            txtCorreo.Text = interfaz.VerCorreo(cedula);
+                            txtNombre.Text = interfaz.VerNombreCliente(cedula);
+                            txtTelefono.Text = interfaz.VerTelefono(cedula);
                             btnModificar.Enabled = true;
                         }
                         else

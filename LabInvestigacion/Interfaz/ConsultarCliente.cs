@@ -24,7 +24,7 @@ namespace Interfaz
 
         private void ConsultarCliente_Load(object sender, EventArgs e)
         {
-            dtgCliente.DataSource = metodos.consultaCliente();
+            dtgCliente.DataSource = metodos.ConsultaCliente();
         }
 
         private void ConsultarCliente_FormClosing(object sender, FormClosingEventArgs e)

@@ -41,7 +41,7 @@ namespace LabInvestigacion.Interfaz
            {
                 if (txbCheck.Text != "")
                 {
-                    if (metodos.existeClienteFisico(int.Parse(txbCheck.Text)))
+                    if (metodos.ExisteClienteFisico(int.Parse(txbCheck.Text)))
                     {
                         String dato;
                         dato = metodos.reporteFactura(txbCheck.Text, mCalentarStart.SelectionStart, mCalentarEnd.SelectionStart);
@@ -67,6 +67,11 @@ namespace LabInvestigacion.Interfaz
                 MessageBox.Show("ERROR: Usuario no Encontrado");
             }
             
+        }
+
+        private void ReporteFacturacion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
