@@ -18,21 +18,23 @@ namespace LabInvestigacion.Interfaz
 
         int codigoFactura;
         Boolean nuevaFactura;
+        Boolean sinProductos;
         string cedula;
 
-        public Facturacion(int codigoFactura, Boolean nuevaFactura)
+        public Facturacion(int codigoFactura, Boolean nuevaFactura, Boolean sinProductos)
         {
             this.nuevaFactura = nuevaFactura;
-            this.codigoFactura = codigoFactura; 
+            this.codigoFactura = codigoFactura;
+            this.sinProductos = sinProductos;
             InitializeComponent();
         }
 
-        public Facturacion(int codigoFactura, Boolean nuevaFactura, string cedula)
+        public Facturacion(int codigoFactura, Boolean nuevaFactura, string cedula, Boolean sinProductos)
         {
-      
-            this.nuevaFactura = nuevaFactura;
             this.codigoFactura = codigoFactura;
+            this.nuevaFactura = nuevaFactura;
             this.cedula = cedula;
+            this.sinProductos = sinProductos;
             InitializeComponent();
         }
 
@@ -75,9 +77,8 @@ namespace LabInvestigacion.Interfaz
                 
                     cedula = txtIngreseClientID.Text;
                     gestor.ComprobarExistenciaCliente(int.Parse(cedula));
-                    gestor.insertarFactura(codigoFactura, int.Parse(cedula));
                     this.Visible = false;
-                    AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
+                    AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula,sinProductos);
                     addProducts.Visible = true;
                 
                 
@@ -85,7 +86,7 @@ namespace LabInvestigacion.Interfaz
                 else
                 {
                 this.Visible = false;
-                AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula);
+                AgregarProductos addProducts = new AgregarProductos(codigoFactura, cedula,sinProductos);
                 addProducts.Visible = true;
                  }
             }
@@ -102,7 +103,15 @@ namespace LabInvestigacion.Interfaz
                 MessageBox.Show("Verificar que no exista un espacio en blanco");
                 return;
             }
-            else if(txtIngreseClientID.Enabled)
+            else if (!gestor.esNumero(txtIngreseClientID.Text))
+            {
+                MessageBox.Show("Verificar que se haya ingresado correctamente la cedula");
+            }
+            else if (nuevaFactura)
+            {
+                MessageBox.Show("Verifique que la cedula esta correcta");
+            }
+            else if (sinProductos)
             {
                 MessageBox.Show("Se deben agregar productos a la factura");
             }

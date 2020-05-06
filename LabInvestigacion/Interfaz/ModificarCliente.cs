@@ -37,8 +37,8 @@ namespace Interfaz
                 {
                     metodos.actualizarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtCorreo.Text, txtTelefono.Text, txtApellido.Text);
                     this.Visible = false;
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.Show();
+                    MantenimientoClientes mantC = new MantenimientoClientes();
+                    mantC.Show();
                 }
                 else
                 {

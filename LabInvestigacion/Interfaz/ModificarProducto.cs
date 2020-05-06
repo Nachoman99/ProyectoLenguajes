@@ -45,9 +45,9 @@ namespace Interfaz
                     {
                         producto = metodos.obtenerProducto(txbCode.Text);
 
-                        if(producto.Descripciom != null)
+                        if(producto.Descripcion != null)
                         {
-                            txbDesc.Text = producto.Descripciom.ToString();
+                            txbDesc.Text = producto.Descripcion.ToString();
                             txtbPrice.Text = "" + producto.Precio.ToString();
                             txbQuantity.Text = "" + producto.CantidadInventario.ToString();
                             txbCode.Enabled = false;

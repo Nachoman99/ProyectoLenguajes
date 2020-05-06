@@ -37,7 +37,7 @@ namespace LabInvestigacion.Interfaz
         {
             this.Visible = false;
             int codigoFactura = gestor.GetLastIdFactura2().CodigoFactura + 1;
-            Facturacion facturacion = new Facturacion(codigoFactura, true);
+            Facturacion facturacion = new Facturacion(codigoFactura, true, true);
             facturacion.Visible = true;
         }
 

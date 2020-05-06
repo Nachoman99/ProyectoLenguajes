@@ -20,11 +20,13 @@ namespace Interfaz
         Gestor gestor = new Gestor();
         int codigoFact;
         string cedula;
+        Boolean isPrimerProducto;
 
-        public AgregarProductos(int codigoFact, string cedula)
+        public AgregarProductos(int codigoFact, string cedula, Boolean isPrimerProducto)
         {
             this.codigoFact = codigoFact;
             this.cedula = cedula;
+            this.isPrimerProducto = isPrimerProducto;
             InitializeComponent();
         }
 
@@ -43,27 +45,32 @@ namespace Interfaz
 
             try
             {
+
                 int codigoProducto = int.Parse(txtProductID.Text);
                 gestor.validarProductoAgotado(codigoProducto, int.Parse(txtCantidad.Text));
                 Producto producto = gestor.ComprobarExistenciaProducto(codigoProducto);
-                int nuevaCantInventario = producto.CantidadInventario - int.Parse(txtCantidad.Text); 
-                gestor.actualizarProducto(codigoProducto,producto.Descripciom,producto.Precio, nuevaCantInventario, true);
+                if (isPrimerProducto)
+                {
+                    gestor.insertarFactura(codigoFact, int.Parse(cedula));
+                    isPrimerProducto = false;
+                }
+                int nuevaCantInventario = producto.CantidadInventario - int.Parse(txtCantidad.Text);
+                gestor.actualizarProducto(codigoProducto, producto.Descripcion, producto.Precio, nuevaCantInventario, true);
                 gestor.insertarFacturaPorProducto(int.Parse(txtCantidad.Text), int.Parse(txtProductID.Text), codigoFact);
-                this.Visible = false;
-                Facturacion menu = new Facturacion(codigoFact, false, cedula);
-                menu.Visible = true;
+                txtCantidad.Text = "";
+                txtProductID.Text = "";
+                dgvListProducts.DataSource = gestor.consultaProducto();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error con Producto");
+                MessageBox.Show(ex.Message);
             }
-           
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
+            private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Facturacion menu = new Facturacion(codigoFact, false, cedula);
+            Facturacion menu = new Facturacion(codigoFact, false, cedula, isPrimerProducto);
             menu.Visible = true;
         }
 

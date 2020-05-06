@@ -22,7 +22,7 @@ namespace AccesoDatos2
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="LanguajesLab1")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="LenguajesLab1")]
 	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
 	{
 		
@@ -45,7 +45,7 @@ namespace AccesoDatos2
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::AccesoDatos2.Properties.Settings.Default.LanguajesLab1ConnectionString, mappingSource)
+				base(global::AccesoDatos2.Properties.Settings.Default.LenguajesLab1ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -123,7 +123,7 @@ namespace AccesoDatos2
 		
 		private string _NumeroTelefono;
 		
-		private System.Nullable<int> _indicActivoCliente;
+		private int _indicActivoCliente;
 		
 		private EntitySet<Factura> _Factura;
 		
@@ -141,7 +141,7 @@ namespace AccesoDatos2
     partial void OnCorreoChanged();
     partial void OnNumeroTelefonoChanging(string value);
     partial void OnNumeroTelefonoChanged();
-    partial void OnindicActivoClienteChanging(System.Nullable<int> value);
+    partial void OnindicActivoClienteChanging(int value);
     partial void OnindicActivoClienteChanged();
     #endregion
 		
@@ -251,8 +251,8 @@ namespace AccesoDatos2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoCliente", DbType="Int")]
-		public System.Nullable<int> indicActivoCliente
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoCliente", DbType="Int NOT NULL")]
+		public int indicActivoCliente
 		{
 			get
 			{
@@ -720,13 +720,13 @@ namespace AccesoDatos2
 		
 		private int _CodigoProducto;
 		
-		private string _Descripciom;
+		private string _Descripcion;
 		
 		private decimal _Precio;
 		
 		private int _CantidadInventario;
 		
-		private System.Nullable<int> _indicActivoProducto;
+		private int _indicActivoProducto;
 		
 		private EntitySet<FacturaPorProducto> _FacturaPorProducto;
 		
@@ -736,13 +736,13 @@ namespace AccesoDatos2
     partial void OnCreated();
     partial void OnCodigoProductoChanging(int value);
     partial void OnCodigoProductoChanged();
-    partial void OnDescripciomChanging(string value);
-    partial void OnDescripciomChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
     partial void OnPrecioChanging(decimal value);
     partial void OnPrecioChanged();
     partial void OnCantidadInventarioChanging(int value);
     partial void OnCantidadInventarioChanged();
-    partial void OnindicActivoProductoChanging(System.Nullable<int> value);
+    partial void OnindicActivoProductoChanging(int value);
     partial void OnindicActivoProductoChanged();
     #endregion
 		
@@ -772,22 +772,22 @@ namespace AccesoDatos2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripciom", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Descripciom
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripcion
 		{
 			get
 			{
-				return this._Descripciom;
+				return this._Descripcion;
 			}
 			set
 			{
-				if ((this._Descripciom != value))
+				if ((this._Descripcion != value))
 				{
-					this.OnDescripciomChanging(value);
+					this.OnDescripcionChanging(value);
 					this.SendPropertyChanging();
-					this._Descripciom = value;
-					this.SendPropertyChanged("Descripciom");
-					this.OnDescripciomChanged();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
 				}
 			}
 		}
@@ -832,8 +832,8 @@ namespace AccesoDatos2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoProducto", DbType="Int")]
-		public System.Nullable<int> indicActivoProducto
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_indicActivoProducto", DbType="Int NOT NULL")]
+		public int indicActivoProducto
 		{
 			get
 			{

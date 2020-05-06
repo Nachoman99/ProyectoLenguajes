@@ -44,5 +44,16 @@ namespace AccesoDatos2.Properties {
                 return ((string)(this["LanguajesLab1ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ELZEPHYRO\\SQLSERVERDEV2019;Initial Catalog=LenguajesLab1;Integrated S" +
+            "ecurity=True")]
+        public string LenguajesLab1ConnectionString {
+            get {
+                return ((string)(this["LenguajesLab1ConnectionString"]));
+            }
+        }
     }
 }

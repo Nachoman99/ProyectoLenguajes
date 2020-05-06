@@ -97,6 +97,65 @@ namespace AccesoDatos
             }
         }
 
+        public void actualizarClienteSolo(Cliente cliente1)
+        {
+            LecturaArchivos lectura = new LecturaArchivos();
+            SqlConnection conexion = new SqlConnection(lectura.leerServer());
+            DataClasses1DataContext dc = new DataClasses1DataContext(conexion);
+            try
+            {
+                if (cliente1.Cedula > 0 && esNumero(cliente1.Cedula) != false)
+                {
+
+                    Cliente cliente = dc.Cliente.First(clie => clie.Cedula.Equals(cliente1.Cedula));
+                    if (cliente1.Nombre != null && cliente1.Nombre != "")
+                    {
+                        cliente.Nombre = cliente1.Nombre;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: El nombre no es válido.");
+                    }
+                    if (cliente.Apellido != null && cliente.Apellido != "")
+                    {
+                        cliente.Apellido = cliente1.Apellido;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: El apellido no es válido.");
+                    }
+                    if (comprobarCorreo(cliente1.Correo) == true)
+                    {
+                        cliente.Correo = cliente1.Correo;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: Correo no válido.");
+                    }
+                    if (esNumero(cliente1.NumeroTelefono) != false)
+                    {
+                        cliente.NumeroTelefono = cliente1.NumeroTelefono;
+                    }
+                    else
+                    {
+                        throw new Exception("Error: Número de teléfono no válido.");
+                    }
+                    cliente.indicActivoCliente = 1;
+                    dc.SubmitChanges();
+                    //MessageBox.Show("Se actualizó correctamente");
+                    dc.Connection.Close();
+                }
+                else
+                {
+                    throw new Exception("Error: La cedula no es válida");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fallo: " + ex.Message);
+            }
+        }
+
         public Cliente verCliente(int cedula)
         {
             string cliente;
@@ -195,8 +254,8 @@ namespace AccesoDatos
                 else if(cliente1.indicActivoCliente == 0)
                 {
                     cliente.indicActivoCliente = 1;
-                    dc.SubmitChanges();
-                    MessageBox.Show("Se insertó exitosamente");
+                    actualizarClienteSolo(cliente);
+                    MessageBox.Show("Se Actualizo exitosamente");
                     dc.Connection.Close();
                 }
             }
@@ -206,7 +265,7 @@ namespace AccesoDatos
             }
             catch (Exception e)
             {
-                MessageBox.Show("Este Cliente ya Existe");
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -288,7 +347,7 @@ namespace AccesoDatos
 
                 if (isAddProduct)
                 {
-                    producto.Descripciom = desc;
+                    producto.Descripcion = desc;
                     producto.Precio = precio;
                     producto.CantidadInventario = cantidad;
                     dc.SubmitChanges();
@@ -296,7 +355,7 @@ namespace AccesoDatos
                 }
                 else
                 {
-                    producto.Descripciom = desc;
+                    producto.Descripcion = desc;
                     producto.Precio = precio;
                     producto.CantidadInventario = cantidad;
                     dc.SubmitChanges();
@@ -328,7 +387,7 @@ namespace AccesoDatos
                 {
                     Producto producto = new Producto();
                     producto.CodigoProducto = codigo;
-                    producto.Descripciom = desc;
+                    producto.Descripcion = desc;
                     producto.Precio = precio;
                     producto.CantidadInventario = cantidad;
                     producto.indicActivoProducto = 1;
@@ -576,9 +635,20 @@ namespace AccesoDatos
             foreach (var codigo in codigoFacturas)
             {
 
-                FacturaPorProducto fpp = dc.FacturaPorProducto.First(clie => clie.CodigoFactura_Fk.Equals(codigo));
-                dato = fpp.CodigoProducto_Fk;
-                intermedios.Add(fpp);
+                //FacturaPorProducto fpp = dc.FacturaPorProducto.First(clie => clie.CodigoFactura_Fk.Equals(codigo));
+                //foreach (var fpp in fpp)
+                //{
+                //    intermedios.Add(fpp.)
+                //}
+
+                var fpp = from facturaPorProducto in dc.FacturaPorProducto
+                          where facturaPorProducto.CodigoFactura_Fk == codigo
+                          select facturaPorProducto;
+                foreach (var fpps in fpp)
+                {
+                    dato = fpps.CodigoProducto_Fk;
+                    intermedios.Add(fpps);
+                }
             }
 
             int cantidad = 0;
@@ -619,14 +689,12 @@ namespace AccesoDatos
                 Producto product = GetProducto(codigoProducto);
                 if (product.CantidadInventario == 0)
                 { 
-                    throw new Exception("El producto " + product.Descripciom + " se encuentra agotado");
+                    throw new Exception("El producto " + product.Descripcion + " se encuentra agotado");
                 }
                 else if(product.CantidadInventario < cantidadSolicitada)
                 {
-                    throw new Exception("La cantidad solicitada excede la cantidad en inventario del producto" + product.Descripciom);
+                    throw new Exception("La cantidad solicitada excede la cantidad en inventario del producto" + product.Descripcion);
                 }
-                
-            
         }
 
         public Producto GetProducto(int codigo)
@@ -642,5 +710,17 @@ namespace AccesoDatos
             return producto;
         }
 
+        //public Intermed PruebCoca(String inter)
+        //{
+        //    FacturaPorProducto fpp = dc.FacturaPorProducto.First(clie => clie.CodigoFactura_Fk.Equals(codigo));
+        //    foreach (var fpp in fpp)
+        //    {
+        //        intermedios.Add(fpp.)
+        //            }
+        //    dato = fpp.CodigoProducto_Fk;
+        //    intermedios.Add(fpp);
+
+        //    return
+        //}
     }
 }

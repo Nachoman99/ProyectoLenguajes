@@ -35,7 +35,7 @@ namespace LabInvestigacion.Interfaz
             MetodosInterfaz metodos = new MetodosInterfaz();
             try
             {
-                if (metodos.esNumero(txtCedula.Text) != false)
+                if (metodos.esNumero(txtCedula.Text))
                 {
                     metodos.insertarCliente(int.Parse(txtCedula.Text), txtNombre.Text, txtApellido.Text, txtCorreo.Text, txtTelefono.Text);
                     this.Visible = false;
@@ -49,9 +49,10 @@ namespace LabInvestigacion.Interfaz
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
+
                 private void InsertarCliente_Load(object sender, EventArgs e)
         {
             
